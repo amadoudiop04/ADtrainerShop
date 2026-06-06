@@ -2,7 +2,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { type Application, type NextFunction, type Request, type Response } from 'express';
 import helmet from 'helmet';
-import * as db from './db';
+import * as db from 'db';
 import userRoutes from './src/routes/user.route';
 import collectionRoutes from './src/routes/collection.route';
 import productRoutes from './src/routes/product.route';

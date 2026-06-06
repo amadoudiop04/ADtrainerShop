@@ -32,8 +32,31 @@ export const getCoachingRequest = async (req: Request, res: Response) => {
   }
 };
 
+const isUuid = (value: unknown): boolean => {
+  return typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value);
+};
+
 export const createCoachingRequestHandler = async (req: Request, res: Response) => {
   const { user_id, full_name, email, phone, coaching_type, availability, message, status } = req.body;
+
+  console.log('Create coaching request body:', req.body);
+
+  if (!full_name || !email || !coaching_type) {
+    return res.status(400).json({ error: 'Les champs full_name, email et coaching_type sont obligatoires' });
+  }
+
+  if (!['one_to_one', 'e_coaching'].includes(coaching_type)) {
+    return res.status(400).json({ error: 'Le champ coaching_type doit être one_to_one ou e_coaching' });
+  }
+
+  if (status && !['new', 'in_progress', 'completed', 'rejected'].includes(status)) {
+    return res.status(400).json({ error: 'Le champ status doit être new, in_progress, completed ou rejected' });
+  }
+
+  if (user_id && !isUuid(user_id)) {
+    return res.status(400).json({ error: 'Le champ user_id doit être un UUID valide' });
+  }
+
   try {
     const request = await createCoachingRequest(
       full_name,
@@ -48,6 +71,9 @@ export const createCoachingRequestHandler = async (req: Request, res: Response) 
     res.status(201).json(request);
   } catch (error) {
     console.error('Error creating coaching request:', error);
+    if ((error as Error).message.includes('violates') || (error as Error).message.includes('duplicate key')) {
+      return res.status(400).json({ error: 'Données invalides pour la demande de coaching' });
+    }
     res.status(500).json({ error: 'An error occurred while creating the coaching request' });
   }
 };

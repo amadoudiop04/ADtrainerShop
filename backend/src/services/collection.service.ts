@@ -67,3 +67,13 @@ export const deleteCollection = async (id: string): Promise<void> => {
     throw new Error('An error occurred while deleting the collection');
   }
 };
+
+export const collectionExists = async (id: string): Promise<boolean> => {
+  try {
+    const collection = await Collection.findByPk(id);
+    return collection !== null;
+  } catch (error) {
+    console.error(`Error checking collection existence for id ${id}:`, error);
+    throw new Error('An error occurred while checking collection existence');
+  }
+};

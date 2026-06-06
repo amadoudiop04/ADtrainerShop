@@ -6,6 +6,7 @@ import {
   updateProduct,
   deleteProduct,
 } from '../services/product.service';
+import { collectionExists } from '../services/collection.service';
 
 export const getProducts = async (req: Request, res: Response) => {
   try {
@@ -32,6 +33,10 @@ export const getProduct = async (req: Request, res: Response) => {
   }
 };
 
+const isUuid = (value: unknown): boolean => {
+  return typeof value === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value);
+};
+
 export const createProductHandler = async (req: Request, res: Response) => {
   const {
     name,
@@ -45,14 +50,43 @@ export const createProductHandler = async (req: Request, res: Response) => {
     status,
   } = req.body;
 
+  if (!name || !slug || price === undefined) {
+    return res.status(400).json({ error: 'Les champs name, slug et price sont obligatoires' });
+  }
+
+  if (collection_id && !isUuid(collection_id)) {
+    return res.status(400).json({ error: 'Le champ collection_id doit être un UUID valide' });
+  }
+
+  if (status && !['available', 'out_of_stock', 'archived'].includes(status)) {
+    return res.status(400).json({ error: 'Le champ status doit être available, out_of_stock ou archived' });
+  }
+
+  if (collection_id) {
+    const exists = await collectionExists(collection_id);
+    if (!exists) {
+      return res.status(400).json({ error: 'La collection spécifiée n\'existe pas' });
+    }
+  }
+
+  const priceNumber = Number(price);
+  const stockNumber = stock !== undefined ? Number(stock) : 0;
+
+  if (Number.isNaN(priceNumber) || priceNumber < 0) {
+    return res.status(400).json({ error: 'Le champ price doit être un nombre positif' });
+  }
+  if (stock !== undefined && (Number.isNaN(stockNumber) || stockNumber < 0)) {
+    return res.status(400).json({ error: 'Le champ stock doit être un entier positif' });
+  }
+
   try {
     const product = await createProduct(
       name,
       slug,
-      Number(price),
+      priceNumber,
       collection_id,
       description,
-      stock !== undefined ? Number(stock) : undefined,
+      stockNumber,
       sku,
       image_url,
       status
@@ -67,6 +101,16 @@ export const createProductHandler = async (req: Request, res: Response) => {
 export const updateProductHandler = async (req: Request, res: Response) => {
   const { id } = req.params;
   const fields = req.body;
+  if (fields.collection_id) {
+    if (!isUuid(fields.collection_id)) {
+      return res.status(400).json({ error: 'Le champ collection_id doit être un UUID valide' });
+    }
+    const exists = await collectionExists(fields.collection_id);
+    if (!exists) {
+      return res.status(400).json({ error: 'La collection spécifiée n\'existe pas' });
+    }
+  }
+
   try {
     const product = await updateProduct(id, fields);
     res.json(product);

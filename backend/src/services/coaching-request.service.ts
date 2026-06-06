@@ -1,4 +1,5 @@
 import CoachingRequest, { CoachingRequestType } from '../models/coaching-request.model';
+import { sendCoachingRequestEmail } from './email.service';
 
 export const getAllCoachingRequests = async (): Promise<CoachingRequestType[]> => {
   try {
@@ -33,7 +34,7 @@ export const createCoachingRequest = async (
   status?: 'new' | 'in_progress' | 'completed' | 'rejected'
 ): Promise<CoachingRequestType> => {
   try {
-    return await CoachingRequest.create({
+    const request = await CoachingRequest.create({
       user_id,
       full_name,
       email,
@@ -43,6 +44,21 @@ export const createCoachingRequest = async (
       message,
       status,
     });
+
+    try {
+      await sendCoachingRequestEmail({
+        full_name: request.full_name,
+        email: request.email,
+        phone: request.phone,
+        coaching_type: request.coaching_type,
+        availability: request.availability,
+        message: request.message,
+      });
+    } catch (emailError) {
+      console.warn('Coaching request created but email sending failed:', emailError);
+    }
+
+    return request;
   } catch (error) {
     console.error('Error creating coaching request:', error);
     throw new Error('An error occurred while creating the coaching request');
