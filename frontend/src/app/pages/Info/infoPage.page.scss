@@ -1,0 +1,592 @@
+$cream: #f0ede8;
+$ink: #0a0a0a;
+$border: rgba(240, 237, 232, 0.09);
+
+@mixin condensed($size: 11px, $tracking: 0.22em) {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: $size;
+  letter-spacing: $tracking;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+@mixin playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+@mixin barlow($weight: 300) {
+  font-family: 'Barlow', sans-serif;
+  font-weight: $weight;
+}
+
+.ip-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: transparent;
+  border-bottom: 0.5px solid transparent;
+  transition: background 0.5s ease, border-color 0.5s ease;
+
+  &.scrolled {
+    background: rgba(10, 10, 10, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-color: $border;
+  }
+}
+
+.ip-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.ip-logo-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  display: block;
+}
+
+.ip-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.ip-nav-link {
+  @include condensed(11px, 0.22em);
+  color: rgba(240, 237, 232, 0.55);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.25s;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 0.5px;
+    background: $cream;
+    transition: width 0.35s ease;
+  }
+
+  &:hover,
+  &.active {
+    color: $cream;
+
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+.ip-header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.ip-lang-btn {
+  @include condensed(11px, 0.18em);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(240, 237, 232, 0.4);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.ip-account-btn {
+  @include condensed(11px, 0.2em);
+  color: $ink;
+  background: $cream;
+  border: 0;
+  border-radius: 100px;
+  padding: 8px 18px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.ip-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(240, 237, 232, 0.12), transparent 28%),
+    radial-gradient(circle at 50% 62%, rgba(240, 237, 232, 0.04), transparent 36%),
+    #111;
+  color: $cream;
+  overflow: hidden;
+}
+
+.ip-hero {
+  width: min(100%, 1220px);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 132px 42px 94px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ip-pill {
+  @include condensed(10px, 0.19em);
+  margin: 0 0 28px;
+  padding: 5px 18px;
+  color: rgba(240, 237, 232, 0.58);
+  border: 1px solid rgba(240, 237, 232, 0.22);
+  border-radius: 999px;
+}
+
+.ip-hero h1 {
+  @include playfair;
+  margin: 0;
+  color: $cream;
+  font-size: clamp(4.1rem, 8vw, 7.5rem);
+  font-weight: 400;
+  line-height: 0.82;
+  text-align: center;
+}
+
+.ip-subtitle {
+  @include barlow(300);
+  margin: 30px 0 86px;
+  color: rgba(240, 237, 232, 0.54);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.ip-card-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.ip-session-card {
+  position: relative;
+  min-height: 650px;
+  overflow: hidden;
+  border: 1px solid rgba(240, 237, 232, 0.1);
+  border-radius: 48px;
+  background: #0c0c0c;
+}
+
+.ip-session-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(0.55) contrast(1.08) brightness(0.42);
+  transform: scale(1.02);
+}
+
+.ip-card-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.82)),
+    radial-gradient(circle at 50% 35%, transparent 0%, rgba(0, 0, 0, 0.38) 68%);
+}
+
+.ip-card-content {
+  position: absolute;
+  left: clamp(28px, 6vw, 54px);
+  right: clamp(28px, 6vw, 54px);
+  bottom: clamp(32px, 6vw, 54px);
+  z-index: 2;
+}
+
+.ip-card-kicker {
+  @include condensed(11px, 0.13em);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  color: rgba(240, 237, 232, 0.86);
+}
+
+.ip-person-icon,
+.ip-cloud-icon {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+}
+
+.ip-person-icon::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: $cream;
+}
+
+.ip-person-icon::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  bottom: 2px;
+  width: 13px;
+  height: 8px;
+  border-radius: 8px 8px 2px 2px;
+  background: $cream;
+}
+
+.ip-cloud-icon::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 8px;
+  width: 15px;
+  height: 8px;
+  border-radius: 999px;
+  background: $cream;
+}
+
+.ip-cloud-icon::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 4px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: $cream;
+}
+
+.ip-card-content h2 {
+  @include playfair;
+  margin: 0 0 18px;
+  color: $cream;
+  font-size: clamp(2.35rem, 4.2vw, 4.15rem);
+  font-weight: 400;
+  line-height: 0.95;
+}
+
+.ip-card-content p:not(.ip-card-kicker) {
+  @include barlow(300);
+  max-width: 390px;
+  margin: 0 0 34px;
+  color: rgba(240, 237, 232, 0.62);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.ip-card-btn {
+  @include condensed(10px, 0.12em);
+  min-width: 205px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: $ink;
+  background: $cream;
+  border: 1px solid $cream;
+  border-radius: 999px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ip-card-btn-dark {
+  color: $cream;
+  background: transparent;
+  border-color: rgba(240, 237, 232, 0.42);
+}
+
+.ip-card-btn span {
+  position: relative;
+  width: 15px;
+  height: 1px;
+  background: currentColor;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -4px;
+    width: 8px;
+    height: 8px;
+    border-top: 1px solid currentColor;
+    border-right: 1px solid currentColor;
+    transform: rotate(45deg);
+  }
+}
+
+.ip-digital-scene {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 72% 62%, rgba(240, 237, 232, 0.1), transparent 20%),
+    linear-gradient(180deg, #1a1a1a, #080808);
+}
+
+.ip-wall-grid {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 0 33%, rgba(240, 237, 232, 0.18) 33.3% 33.5%, transparent 33.7% 66%, rgba(240, 237, 232, 0.12) 66.3% 66.5%, transparent 66.7%),
+    linear-gradient(18deg, transparent 0 49%, rgba(240, 237, 232, 0.2) 49.2% 49.5%, transparent 49.8%);
+  opacity: 0.5;
+}
+
+.ip-console {
+  position: absolute;
+  right: 14%;
+  bottom: 22%;
+  width: 34%;
+  height: 16%;
+  border: 1px solid rgba(240, 237, 232, 0.18);
+  border-radius: 16px;
+  background:
+    repeating-linear-gradient(90deg, rgba(240, 237, 232, 0.18) 0 2px, transparent 2px 15px),
+    linear-gradient(145deg, rgba(240, 237, 232, 0.12), rgba(0, 0, 0, 0.4));
+  transform: perspective(400px) rotateX(54deg) rotateZ(9deg);
+}
+
+.ip-orb {
+  position: absolute;
+  right: 34%;
+  bottom: 20%;
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 28%, #555, #070707 72%);
+}
+
+.ip-panel-lines {
+  position: absolute;
+  left: 16%;
+  top: 30%;
+  width: 22%;
+  height: 46%;
+  border-left: 1px solid rgba(240, 237, 232, 0.2);
+  border-right: 1px solid rgba(240, 237, 232, 0.1);
+}
+
+.ip-contact-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 180;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.ip-contact-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 190;
+  width: min(calc(100vw - 32px), 560px);
+  max-height: min(720px, calc(100vh - 42px));
+  overflow-y: auto;
+  padding: 32px 34px;
+  border: 1px solid rgba(240, 237, 232, 0.14);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 78% 0%, rgba(240, 237, 232, 0.08), transparent 28%),
+    #101010;
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.62);
+  transform: translate(-50%, -50%);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(240, 237, 232, 0.26) transparent;
+}
+
+.ip-contact-modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ip-contact-modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ip-contact-modal::-webkit-scrollbar-thumb {
+  background: rgba(240, 237, 232, 0.2);
+  border-radius: 999px;
+}
+
+.ip-contact-close {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(240, 237, 232, 0.18);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 1px;
+    background: $cream;
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}
+
+.ip-contact-kicker {
+  @include condensed(10px, 0.2em);
+  margin: 0 0 16px;
+  color: rgba(240, 237, 232, 0.46);
+}
+
+.ip-contact-modal h2 {
+  @include playfair;
+  margin: 0;
+  color: $cream;
+  font-size: clamp(2.6rem, 7vw, 4.4rem);
+  font-weight: 400;
+  line-height: 0.9;
+}
+
+.ip-contact-copy {
+  @include barlow(300);
+  max-width: 390px;
+  margin: 14px 0 24px;
+  color: rgba(240, 237, 232, 0.56);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.ip-contact-form {
+  display: grid;
+  gap: 12px;
+}
+
+.ip-contact-form label {
+  display: grid;
+  gap: 7px;
+}
+
+.ip-contact-form span {
+  @include condensed(10px, 0.16em);
+  color: rgba(240, 237, 232, 0.54);
+}
+
+.ip-contact-form input,
+.ip-contact-form select,
+.ip-contact-form textarea {
+  @include barlow(300);
+  width: 100%;
+  color: $cream;
+  background: rgba(240, 237, 232, 0.055);
+  border: 1px solid rgba(240, 237, 232, 0.13);
+  border-radius: 16px;
+  outline: none;
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, background 0.2s;
+
+  &:focus {
+    border-color: rgba(240, 237, 232, 0.48);
+    background: rgba(240, 237, 232, 0.08);
+  }
+
+  &::placeholder {
+    color: rgba(240, 237, 232, 0.26);
+  }
+}
+
+.ip-contact-form select {
+  appearance: none;
+}
+
+.ip-contact-form textarea {
+  resize: vertical;
+  min-height: 84px;
+  max-height: 140px;
+}
+
+.ip-submit-btn {
+  @include condensed(11px, 0.18em);
+  width: 100%;
+  height: 48px;
+  margin-top: 6px;
+  color: $ink;
+  background: $cream;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .ip-hero {
+    padding: 118px 22px 72px;
+  }
+
+  .ip-card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ip-session-card {
+    min-height: 560px;
+    border-radius: 34px;
+  }
+}
+
+@media (max-width: 680px) {
+  .ip-header {
+    padding: 18px 20px;
+  }
+
+  .ip-nav {
+    gap: 18px;
+  }
+
+  .ip-header-right {
+    gap: 10px;
+  }
+
+  .ip-account-btn {
+    padding: 8px 14px;
+  }
+
+  .ip-subtitle {
+    margin-bottom: 52px;
+  }
+
+  .ip-session-card {
+    min-height: 510px;
+  }
+
+  .ip-card-btn {
+    min-width: 180px;
+  }
+
+  .ip-contact-modal {
+    max-height: calc(100vh - 28px);
+    padding: 28px 20px 22px;
+    border-radius: 24px;
+  }
+}

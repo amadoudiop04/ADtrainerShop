@@ -1,0 +1,107 @@
+<header id="hdr" class="lp-header scrolled">
+  <a href="/" class="lp-logo">
+    <img src="LogoADTrainer-removebg-preview.png" alt="ADtrainer Shop" class="lp-logo-img" />
+  </a>
+
+  <nav class="lp-nav">
+    <a href="/" class="lp-nav-link">Overview</a>
+    <a href="/gallery" class="lp-nav-link active">Gallery</a>
+    <a href="/infos" class="lp-nav-link">Infos</a>
+  </nav>
+
+  <div class="lp-header-right">
+    <button type="button" class="lp-lang-btn" (click)="toggleLanguage()" [attr.aria-label]="'Changer la langue: ' + languageLabel">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.1">
+        <circle cx="7" cy="7" r="5.8"/>
+        <ellipse cx="7" cy="7" rx="2.6" ry="5.8"/>
+        <line x1="1.2" y1="7" x2="12.8" y2="7"/>
+        <line x1="7" y1="1.2" x2="7" y2="12.8"/>
+      </svg>
+      {{ languageLabel }}
+    </button>
+    <a [href]="accountHref" class="lp-account-btn">{{ accountLabel }}</a>
+  </div>
+</header>
+
+<main class="gp-gallery">
+  <section class="gp-gallery-inner">
+    <app-container-scroll>
+      <div scroll-title>
+        <h1 class="gp-gallery-title">
+          Profiter de nos games d'accessoires<br>
+          sportifs confortables et resistance
+        </h1>
+        <div class="gp-gallery-rule"></div>
+      </div>
+
+      <div class="gp-scroll-shop" aria-label="Apercu de la boutique ADtrainer">
+        <div class="gp-scroll-copy">
+          <span>ONLINE MARKET</span>
+          <h2>Shop</h2>
+          <p>Selection technique pour entrainement, performance et recuperation.</p>
+        </div>
+
+        <div class="gp-scroll-products">
+          <a href="/products/spring-running-drop-2" class="gp-product-card">
+            <div class="gp-product-art gp-product-shoe"></div>
+            <span>AEROCLIMB V1</span>
+            <strong>$109.00</strong>
+          </a>
+
+          <a href="/products/london-26-racing-vest" class="gp-product-card">
+            <div class="gp-product-art gp-product-top"></div>
+            <span>HYDROCORE TEE</span>
+            <strong>$75.00</strong>
+          </a>
+
+          <a href="/products/elite-race-kit" class="gp-product-card">
+            <div class="gp-product-art gp-product-kettle"></div>
+            <span>PRO-GRIP KETTLE</span>
+            <strong>$110.00</strong>
+          </a>
+
+          <a href="/products/outerwear" class="gp-product-card">
+            <div class="gp-product-art gp-product-short"></div>
+            <span>ELITE RUN SHORT</span>
+            <strong>$55.00</strong>
+          </a>
+        </div>
+      </div>
+    </app-container-scroll>
+  </section>
+
+  <section class="gp-journal" aria-labelledby="gallery-journal-title">
+    <div class="gp-journal-head">
+      <h2 id="gallery-journal-title">Gallery</h2>
+    </div>
+
+    <div class="gp-journal-grid">
+     
+
+      <a href="/products/spring-running-drop-2" class="gp-journal-card">
+        <figure class="gp-art-card gp-art-run"></figure>
+        <div class="gp-journal-meta">
+          <h3>Spring Running Drop 2</h3>
+          <time datetime="2026-04-19">April 19, 2026</time>
+        </div>
+      </a>
+
+      <a href="/products/elite-race-kit" class="gp-journal-card">
+        <figure class="gp-art-card gp-art-elite"></figure>
+        <div class="gp-journal-meta">
+          <h3>Elite Race Kit</h3>
+          <time datetime="2026-04-12">April 12, 2026</time>
+        </div>
+      </a>
+
+      <a href="/products/valencia" class="gp-journal-card">
+        <figure class="gp-art-card gp-art-valencia"></figure>
+        <div class="gp-journal-meta">
+          <h3>Valencia</h3>
+          <time datetime="2025-12-14">December 14, 2025</time>
+        </div>
+      </a>
+      
+    </div>
+  </section>
+</main>

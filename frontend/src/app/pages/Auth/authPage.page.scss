@@ -1,0 +1,205 @@
+$cream: #f0ede8;
+$ink: #0a0a0a;
+$border: rgba(240, 237, 232, 0.09);
+
+@mixin condensed($size: 11px, $tracking: 0.22em) {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: $size;
+  letter-spacing: $tracking;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+@mixin playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+@mixin barlow($weight: 300) {
+  font-family: 'Barlow', sans-serif;
+  font-weight: $weight;
+}
+
+.auth-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: rgba(10, 10, 10, 0.88);
+  border-bottom: 0.5px solid $border;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.auth-logo,
+.auth-account-btn,
+.auth-nav-link {
+  text-decoration: none;
+}
+
+.auth-logo-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  display: block;
+}
+
+.auth-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.auth-nav-link {
+  @include condensed(11px, 0.22em);
+  color: rgba(240, 237, 232, 0.55);
+}
+
+.auth-nav-link:hover {
+  color: $cream;
+}
+
+.auth-account-btn {
+  @include condensed(11px, 0.2em);
+  color: $ink;
+  background: $cream;
+  border-radius: 100px;
+  padding: 9px 18px;
+}
+
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 128px 20px 64px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(240, 237, 232, 0.12), transparent 28%),
+    radial-gradient(circle at 80% 74%, rgba(240, 237, 232, 0.045), transparent 22%),
+    #101010;
+  color: $cream;
+}
+
+.auth-panel {
+  width: min(100%, 520px);
+  padding: 42px;
+  border: 1px solid rgba(240, 237, 232, 0.12);
+  border-radius: 30px;
+  background:
+    radial-gradient(circle at 84% 0%, rgba(240, 237, 232, 0.08), transparent 26%),
+    rgba(13, 13, 13, 0.92);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
+}
+
+.auth-panel-wide {
+  width: min(100%, 680px);
+}
+
+.auth-kicker {
+  @include condensed(10px, 0.2em);
+  margin: 0 0 18px;
+  color: rgba(240, 237, 232, 0.44);
+}
+
+.auth-panel h1 {
+  @include playfair;
+  margin: 0;
+  color: $cream;
+  font-size: clamp(3rem, 8vw, 5.3rem);
+  font-weight: 400;
+  line-height: 0.9;
+}
+
+.auth-copy,
+.auth-switch {
+  @include barlow(300);
+  color: rgba(240, 237, 232, 0.56);
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.auth-copy {
+  max-width: 420px;
+  margin: 22px 0 30px;
+}
+
+.auth-form {
+  display: grid;
+  gap: 16px;
+}
+
+.auth-grid-form {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.auth-full {
+  grid-column: 1 / -1;
+}
+
+.auth-form label {
+  display: grid;
+  gap: 8px;
+}
+
+.auth-form span {
+  @include condensed(10px, 0.16em);
+  color: rgba(240, 237, 232, 0.54);
+}
+
+.auth-form input {
+  @include barlow(300);
+  width: 100%;
+  color: $cream;
+  background: rgba(240, 237, 232, 0.055);
+  border: 1px solid rgba(240, 237, 232, 0.13);
+  border-radius: 16px;
+  outline: none;
+  padding: 15px 16px;
+  font-size: 0.95rem;
+}
+
+.auth-form input:focus {
+  border-color: rgba(240, 237, 232, 0.48);
+}
+
+.auth-form button {
+  @include condensed(11px, 0.18em);
+  height: 52px;
+  color: $ink;
+  background: $cream;
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.auth-switch {
+  margin: 24px 0 0;
+}
+
+.auth-switch a {
+  color: $cream;
+}
+
+@media (max-width: 680px) {
+  .auth-header {
+    padding: 18px 20px;
+  }
+
+  .auth-nav {
+    gap: 18px;
+  }
+
+  .auth-panel {
+    padding: 32px 22px;
+  }
+
+  .auth-grid-form {
+    grid-template-columns: 1fr;
+  }
+}

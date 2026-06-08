@@ -1,0 +1,604 @@
+
+// ══════════════════════════════════════
+// ADtrainer Shop — Landing Page Styles
+// landingPage.page.scss
+// ══════════════════════════════════════
+
+// ── Tokens ──────────────────────────
+$cream:      #f0ede8;
+$ink:        #0a0a0a;
+$ink-mid:    #0d0d0c;
+$ink-light:  #131210;
+$border:     rgba(240, 237, 232, 0.07);
+$muted:      rgba(240, 237, 232, 0.4);
+
+// ── Mixins ──────────────────────────
+@mixin condensed($size: 11px, $tracking: 0.22em) {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: $size;
+  letter-spacing: $tracking;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+@mixin playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+@mixin barlow($weight: 300) {
+  font-family: 'Barlow', sans-serif;
+  font-weight: $weight;
+}
+
+// ── Animation ───────────────────────
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes sponsorMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.fade-up {
+  opacity: 0;
+  animation: fadeUp 0.9s ease forwards;
+}
+
+// ══════════════════════════════════════
+// HEADER
+// ══════════════════════════════════════
+.lp-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: transparent;
+  border-bottom: 0.5px solid transparent;
+  transition: background 0.5s ease, border-color 0.5s ease;
+
+  &.scrolled {
+    background: rgba(10, 10, 10, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-color: $border;
+  }
+}
+
+.lp-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.lp-logo-img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  display: block;
+}
+
+.lp-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.lp-nav-link {
+  @include condensed(11px, 0.22em);
+  color: rgba(240, 237, 232, 0.55);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.25s;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; left: 0;
+    width: 0; height: 0.5px;
+    background: $cream;
+    transition: width 0.35s ease;
+  }
+
+  &:hover,
+  &.active {
+    color: $cream;
+    &::after { width: 100%; }
+  }
+}
+
+.lp-header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.lp-lang-btn {
+  @include condensed(11px, 0.18em);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(240, 237, 232, 0.4);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s;
+
+  &:hover { color: $cream; }
+}
+
+.lp-account-btn {
+  @include condensed(11px, 0.2em);
+  color: $cream;
+  background: transparent;
+  border: 0.5px solid rgba(240, 237, 232, 0.25);
+  padding: 8px 18px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.2s;
+
+  &:hover { border-color: rgba(240, 237, 232, 0.6); }
+}
+
+// ══════════════════════════════════════
+// HERO
+// ══════════════════════════════════════
+.lp-hero {
+  position: relative;
+  height: 100vh;
+  min-height: 680px;
+  overflow: hidden;
+  background: $ink;
+}
+
+.lp-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%; // ← ajuste le cadrage du visage/corps
+}
+
+.lp-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom,
+      rgba(10,10,10,0.50)  0%,
+      rgba(10,10,10,0.15) 25%,
+      rgba(10,10,10,0.20) 50%,
+      rgba(10,10,10,0.85) 80%,
+      rgba(10,10,10,1.00) 100%
+    );
+}
+
+.lp-hero-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 96px;
+  padding-left: 24px;
+  padding-right: 24px;
+  z-index: 10;
+  text-align: center;
+}
+
+.lp-eyebrow {
+  @include condensed(9px, 0.45em);
+  color: rgba(240, 237, 232, 0.45);
+  margin-bottom: 20px;
+}
+
+.lp-hero-title {
+  margin: 0;
+}
+
+.lp-title-straight {
+  @include playfair;
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1.1;
+  color: $cream;
+  display: block;
+}
+
+.lp-title-italic {
+  @include playfair;
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.1;
+  color: $cream;
+  display: block;
+}
+
+.lp-hero-sub {
+  @include barlow(300);
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: rgba(240, 237, 232, 0.45);
+  margin-top: 20px;
+  max-width: 340px;
+}
+
+.lp-hero-ctas {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.lp-btn-primary {
+  @include condensed(10px, 0.28em);
+  color: $ink;
+  background: $cream;
+  border: none;
+  padding: 13px 28px;
+  border-radius: 100px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover { background: #fff; }
+}
+
+.lp-btn-secondary {
+  @include condensed(10px, 0.28em);
+  color: $cream;
+  background: transparent;
+  border: 0.5px solid rgba(240, 237, 232, 0.35);
+  padding: 13px 28px;
+  border-radius: 100px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+
+  &:hover { border-color: rgba(240, 237, 232, 0.7); }
+}
+
+.lp-scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+}
+
+.lp-scroll-label {
+  @include condensed(8px, 0.35em);
+  color: rgba(240, 237, 232, 0.25);
+  writing-mode: vertical-rl;
+}
+
+.lp-scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, rgba(240,237,232,0.2), transparent);
+}
+
+// ══════════════════════════════════════
+// SPONSORS
+// ══════════════════════════════════════
+.lp-sponsors {
+  border-top: 0.5px solid $border;
+  border-bottom: 0.5px solid $border;
+  background: $ink-mid;
+  overflow: hidden;
+}
+
+.lp-sponsors-mask {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+}
+
+.lp-sponsors-track {
+  display: flex;
+  width: max-content;
+  animation: sponsorMarquee 20s linear infinite;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+.lp-sponsors-group {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 28px 24px;
+  flex-shrink: 0;
+}
+
+.lp-sponsor-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 112px;
+  opacity: 0.28;
+  transition: opacity 0.3s;
+  cursor: default;
+
+  &:hover { opacity: 0.7; }
+}
+
+.lp-sponsor-combo {
+  gap: 6px;
+}
+
+.lp-sep {
+  width: 1px;
+  height: 16px;
+  background: rgba(240, 237, 232, 0.1);
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .lp-sponsors-track {
+    animation-duration: 16s;
+  }
+
+  .lp-sponsors-group {
+    gap: 18px;
+    padding: 24px 18px;
+  }
+
+  .lp-sponsor-item {
+    min-width: 96px;
+  }
+}
+
+// ══════════════════════════════════════
+// PRECISION ENGINE
+// ══════════════════════════════════════
+.lp-precision {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 520px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lp-precision-left {
+  background: $ink;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 56px;
+
+  @media (max-width: 900px) {
+    padding: 56px 32px;
+  }
+}
+
+.lp-precision-title {
+  @include playfair;
+  font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+  font-weight: 200;
+  line-height: 1.2;
+  color: $cream;
+  margin-bottom: 24px;
+}
+
+.lp-precision-body {
+  @include barlow(300);
+  font-size: 0.82rem;
+  line-height: 1.9;
+  color: rgba(240, 237, 232, 0.4);
+  max-width: 300px;
+  margin-bottom: 48px;
+}
+
+.lp-stats {
+  display: flex;
+  gap: 40px;
+  padding-top: 28px;
+  border-top: 0.5px solid rgba(240, 237, 232, 0.09);
+}
+
+.lp-stat {}
+
+.lp-stat-num {
+  @include condensed;
+  font-size: 1.9rem;
+  font-weight: 300;
+  color: $cream;
+  display: block;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.lp-stat-label {
+  @include condensed(9px, 0.22em);
+  color: rgba(240, 237, 232, 0.35);
+  display: block;
+  margin-top: 8px;
+}
+
+.lp-precision-right {
+  position: relative;
+  min-height: 480px;
+  overflow: hidden;
+  background: $ink-light;
+
+  @media (max-width: 900px) {
+    min-height: 320px;
+  }
+}
+
+.lp-engine-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  filter: saturate(0.82) contrast(1.08);
+}
+
+.lp-engine-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(10,10,10,0.58) 0%, rgba(10,10,10,0.18) 45%, rgba(10,10,10,0.72) 100%),
+    linear-gradient(to bottom, rgba(10,10,10,0.08) 0%, rgba(10,10,10,0.65) 100%);
+  pointer-events: none;
+}
+
+.lp-collection-label {
+  @include condensed(8px, 0.25em);
+  color: rgba(240, 237, 232, 0.18);
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  z-index: 2;
+}
+
+// ══════════════════════════════════════
+// FOOTER
+// ══════════════════════════════════════
+.lp-footer {
+  background: #0d0d0b;
+  border-top: 0.5px solid $border;
+  padding: 64px 56px 40px;
+
+  @media (max-width: 768px) {
+    padding: 48px 24px 32px;
+  }
+}
+
+.lp-footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 48px;
+  border-bottom: 0.5px solid $border;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.lp-footer-brand {}
+
+.lp-footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.lp-footer-name {
+  @include condensed(13px, 0.18em);
+  color: $cream;
+}
+
+.lp-footer-tagline {
+  @include barlow(300);
+  font-size: 0.75rem;
+  line-height: 1.8;
+  color: rgba(240, 237, 232, 0.35);
+  max-width: 190px;
+  margin-bottom: 28px;
+}
+
+.lp-instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  @include condensed(10px, 0.22em);
+  color: rgba(240, 237, 232, 0.38);
+  text-decoration: none;
+  border: 0.5px solid rgba(240, 237, 232, 0.12);
+  padding: 9px 16px;
+  transition: color 0.2s, border-color 0.2s;
+
+  &:hover {
+    color: $cream;
+    border-color: rgba(240, 237, 232, 0.35);
+  }
+}
+
+.lp-footer-col {
+  .lp-footer-col-title {
+    @include condensed(10px, 0.3em);
+    color: $cream;
+    margin-bottom: 20px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    li a {
+      @include barlow(300);
+      font-size: 0.78rem;
+      color: rgba(240, 237, 232, 0.35);
+      text-decoration: none;
+      transition: color 0.2s;
+
+      &:hover { color: $cream; }
+    }
+  }
+}
+
+.lp-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  gap: 16px;
+
+  @media (max-width: 560px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.lp-footer-copy {
+  @include condensed(9px, 0.2em);
+  color: rgba(240, 237, 232, 0.18);
+}
+
+.lp-footer-legal {
+  display: flex;
+  gap: 24px;
+
+  a {
+    @include condensed(9px, 0.15em);
+    color: rgba(240, 237, 232, 0.18);
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover { color: rgba(240, 237, 232, 0.5); }
+  }
+}

@@ -1,0 +1,67 @@
+.cs-shell {
+  min-height: 56rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.cs-perspective {
+  width: min(100%, 980px);
+  padding: 4rem 0 3rem;
+  perspective: 1000px;
+}
+
+.cs-header {
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
+  transition: transform 0.08s linear;
+  will-change: transform;
+}
+
+.cs-card {
+  width: min(100%, 900px);
+  height: clamp(34rem, 58vw, 39rem);
+  min-height: 34rem;
+  margin: -2rem auto 0;
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+  border: 4px solid #6c6c6c;
+  border-radius: 34px;
+  background: #222;
+  box-shadow:
+    0 0 0 rgba(0, 0, 0, 0.3),
+    0 9px 20px rgba(0, 0, 0, 0.29),
+    0 37px 37px rgba(0, 0, 0, 0.26),
+    0 84px 50px rgba(0, 0, 0, 0.15),
+    0 149px 60px rgba(0, 0, 0, 0.04);
+  transform-origin: center top;
+  transition: transform 0.08s linear;
+  will-change: transform;
+}
+
+.cs-card-inner {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 22px;
+  background: #101010;
+}
+
+@media (max-width: 768px) {
+  .cs-shell {
+    min-height: 48rem;
+    padding: 1rem;
+  }
+
+  .cs-perspective {
+    padding: 4rem 0;
+  }
+
+  .cs-card {
+    min-height: 40rem;
+    height: auto;
+    margin-top: -2rem;
+  }
+}

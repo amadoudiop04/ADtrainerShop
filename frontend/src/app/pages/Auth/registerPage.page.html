@@ -1,0 +1,52 @@
+<header id="hdr" class="auth-header scrolled">
+  <a href="/" class="auth-logo">
+    <img src="LogoADTrainer-removebg-preview.png" alt="ADtrainer Shop" class="auth-logo-img" />
+  </a>
+
+  <nav class="auth-nav">
+    <a href="/" class="auth-nav-link">Overview</a>
+    <a href="/gallery" class="auth-nav-link">Gallery</a>
+    <a href="/infos" class="auth-nav-link">Infos</a>
+  </nav>
+
+  <a href="/login" class="auth-account-btn">Account</a>
+</header>
+
+<main class="auth-page">
+  <section class="auth-panel auth-panel-wide">
+    <p class="auth-kicker">Create account</p>
+    <h1>Join ADtrainer</h1>
+    <p class="auth-copy">Cree ton compte client avec les champs alignes sur la table users.</p>
+
+    <form class="auth-form auth-grid-form" #registerForm (submit)="$event.preventDefault(); register(registerForm)">
+      <label>
+        <span>First name</span>
+        <input type="text" name="firstName" autocomplete="given-name" placeholder="Amadou" required />
+      </label>
+
+      <label>
+        <span>Last name</span>
+        <input type="text" name="lastName" autocomplete="family-name" placeholder="Diallo" required />
+      </label>
+
+      <label>
+        <span>Email</span>
+        <input type="email" name="email" autocomplete="email" placeholder="you@example.com" required />
+      </label>
+
+      <label>
+        <span>Phone</span>
+        <input type="tel" name="phone" autocomplete="tel" placeholder="+33 6 12 34 56 78" />
+      </label>
+
+      <label class="auth-full">
+        <span>Password</span>
+        <input type="password" name="password" autocomplete="new-password" placeholder="••••••••" required />
+      </label>
+
+      <button type="submit" class="auth-full">Create account</button>
+    </form>
+
+    <p class="auth-switch">Deja un compte ? <a href="/login">Se connecter</a></p>
+  </section>
+</main>

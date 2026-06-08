@@ -1,0 +1,37 @@
+<header id="hdr" class="auth-header scrolled">
+  <a href="/" class="auth-logo">
+    <img src="LogoADTrainer-removebg-preview.png" alt="ADtrainer Shop" class="auth-logo-img" />
+  </a>
+
+  <nav class="auth-nav">
+    <a href="/" class="auth-nav-link">Overview</a>
+    <a href="/gallery" class="auth-nav-link">Gallery</a>
+    <a href="/infos" class="auth-nav-link">Infos</a>
+  </nav>
+
+  <a href="/login" class="auth-account-btn">Account</a>
+</header>
+
+<main class="auth-page">
+  <section class="auth-panel">
+    <p class="auth-kicker">Member access</p>
+    <h1>Login</h1>
+    <p class="auth-copy">Connecte-toi pour acceder a ton espace ADtrainer, tes commandes et tes services.</p>
+
+    <form class="auth-form" #loginForm (submit)="$event.preventDefault(); login(loginForm)">
+      <label>
+        <span>Email</span>
+        <input type="email" name="email" autocomplete="email" placeholder="you@example.com" required />
+      </label>
+
+      <label>
+        <span>Password</span>
+        <input type="password" name="password" autocomplete="current-password" placeholder="••••••••" required />
+      </label>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p class="auth-switch">Pas encore de compte ? <a href="/register">Creer un compte</a></p>
+  </section>
+</main>
