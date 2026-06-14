@@ -1,107 +1,101 @@
-<header id="hdr" class="lp-header scrolled">
-  <a href="/" class="lp-logo">
-    <img src="LogoADTrainer-removebg-preview.png" alt="ADtrainer Shop" class="lp-logo-img" />
-  </a>
+<app-site-header></app-site-header>
 
-  <nav class="lp-nav">
-    <a href="/" class="lp-nav-link">Overview</a>
-    <a href="/gallery" class="lp-nav-link active">Gallery</a>
-    <a href="/infos" class="lp-nav-link">Infos</a>
-  </nav>
-
-  <div class="lp-header-right">
-    <button type="button" class="lp-lang-btn" (click)="toggleLanguage()" [attr.aria-label]="'Changer la langue: ' + languageLabel">
-      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.1">
-        <circle cx="7" cy="7" r="5.8"/>
-        <ellipse cx="7" cy="7" rx="2.6" ry="5.8"/>
-        <line x1="1.2" y1="7" x2="12.8" y2="7"/>
-        <line x1="7" y1="1.2" x2="7" y2="12.8"/>
-      </svg>
-      {{ languageLabel }}
-    </button>
-    <a [href]="accountHref" class="lp-account-btn">{{ accountLabel }}</a>
+<!-- ── Boutique fermée (non-admin) ─────────────────────── -->
+<main class="gp-closed" *ngIf="!shopOpen && !isAdmin">
+  <div class="gp-closed-inner">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+    </svg>
+    <p class="gp-closed-kicker">{{ 'gallery.closed.kicker' | t }}</p>
+    <h1 class="gp-closed-title">{{ 'gallery.closed.title' | t }}</h1>
+    <p class="gp-closed-copy">{{ 'gallery.closed.copy' | t }}</p>
+    <a href="/" class="gp-closed-btn">{{ 'gallery.closed.btn' | t }}</a>
   </div>
-</header>
+</main>
 
-<main class="gp-gallery">
+<main class="gp-gallery" *ngIf="shopOpen || isAdmin">
   <section class="gp-gallery-inner">
     <app-container-scroll>
       <div scroll-title>
-        <h1 class="gp-gallery-title">
-          Profiter de nos games d'accessoires<br>
-          sportifs confortables et resistance
-        </h1>
+        <h1 class="gp-gallery-title">{{ 'gallery.title' | t }}</h1>
         <div class="gp-gallery-rule"></div>
       </div>
 
       <div class="gp-scroll-shop" aria-label="Apercu de la boutique ADtrainer">
         <div class="gp-scroll-copy">
           <span>ONLINE MARKET</span>
-          <h2>Shop</h2>
-          <p>Selection technique pour entrainement, performance et recuperation.</p>
+          <h2>{{ 'gallery.shop' | t }}</h2>
+          <p>{{ 'gallery.shopCopy' | t }}</p>
         </div>
 
         <div class="gp-scroll-products">
-          <a href="/products/spring-running-drop-2" class="gp-product-card">
-            <div class="gp-product-art gp-product-shoe"></div>
-            <span>AEROCLIMB V1</span>
-            <strong>$109.00</strong>
-          </a>
-
-          <a href="/products/london-26-racing-vest" class="gp-product-card">
-            <div class="gp-product-art gp-product-top"></div>
-            <span>HYDROCORE TEE</span>
-            <strong>$75.00</strong>
-          </a>
-
-          <a href="/products/elite-race-kit" class="gp-product-card">
-            <div class="gp-product-art gp-product-kettle"></div>
-            <span>PRO-GRIP KETTLE</span>
-            <strong>$110.00</strong>
-          </a>
-
-          <a href="/products/outerwear" class="gp-product-card">
-            <div class="gp-product-art gp-product-short"></div>
-            <span>ELITE RUN SHORT</span>
-            <strong>$55.00</strong>
-          </a>
+          <ng-container *ngIf="!isLoadingProducts && !loadError">
+            <a
+              *ngFor="let product of products"
+              [href]="'/products/' + product.slug"
+              class="gp-product-card"
+            >
+              <div class="gp-product-art">
+                <img [src]="getImageUrl(product)" [alt]="product.name" />
+              </div>
+              <span>{{ product.name }}</span>
+              <strong>{{ formatPrice(product.price) }}</strong>
+            </a>
+            <p class="gp-empty" *ngIf="products.length === 0">{{ 'gallery.empty' | t }}</p>
+          </ng-container>
+          <p class="gp-error" *ngIf="loadError">{{ 'gallery.error' | t }}</p>
         </div>
       </div>
     </app-container-scroll>
   </section>
 
   <section class="gp-journal" aria-labelledby="gallery-journal-title">
-    <div class="gp-journal-head">
-      <h2 id="gallery-journal-title">Gallery</h2>
-    </div>
+    <div class="gp-journal-inner">
+      <div class="gp-journal-head">
+        <h2 id="gallery-journal-title">{{ 'gallery.journal' | t }}</h2>
+      </div>
 
-    <div class="gp-journal-grid">
-     
+      <div class="gp-journal-grid">
 
-      <a href="/products/spring-running-drop-2" class="gp-journal-card">
-        <figure class="gp-art-card gp-art-run"></figure>
-        <div class="gp-journal-meta">
-          <h3>Spring Running Drop 2</h3>
-          <time datetime="2026-04-19">April 19, 2026</time>
-        </div>
-      </a>
+        <a *ngIf="products.at(0)" [href]="'/products/' + products.at(0)!.slug" class="gp-journal-card">
+          <figure>
+            <img [src]="products.at(0)!.image_url" [alt]="products.at(0)!.name" />
+          </figure>
+          <div class="gp-journal-meta">
+            <span class="gp-journal-tag">{{ 'gallery.tag.running' | t }}</span>
+            <h3>{{ products.at(0)!.name }}</h3>
+          </div>
+        </a>
 
-      <a href="/products/elite-race-kit" class="gp-journal-card">
-        <figure class="gp-art-card gp-art-elite"></figure>
-        <div class="gp-journal-meta">
-          <h3>Elite Race Kit</h3>
-          <time datetime="2026-04-12">April 12, 2026</time>
-        </div>
-      </a>
+        <a *ngIf="products.at(1)" [href]="'/products/' + products.at(1)!.slug" class="gp-journal-card">
+          <figure>
+            <img [src]="products.at(1)!.image_url" [alt]="products.at(1)!.name" />
+          </figure>
+          <div class="gp-journal-meta">
+            <span class="gp-journal-tag">{{ 'gallery.tag.performance' | t }}</span>
+            <h3>{{ products.at(1)!.name }}</h3>
+          </div>
+        </a>
 
-      <a href="/products/valencia" class="gp-journal-card">
-        <figure class="gp-art-card gp-art-valencia"></figure>
-        <div class="gp-journal-meta">
-          <h3>Valencia</h3>
-          <time datetime="2025-12-14">December 14, 2025</time>
-        </div>
-      </a>
-      
+        <a *ngIf="products.at(2)" [href]="'/products/' + products.at(2)!.slug" class="gp-journal-card">
+          <figure>
+            <img [src]="products.at(2)!.image_url" [alt]="products.at(2)!.name" />
+          </figure>
+          <div class="gp-journal-meta">
+            <span class="gp-journal-tag">{{ 'gallery.tag.event' | t }}</span>
+            <h3>{{ products.at(2)!.name }}</h3>
+          </div>
+        </a>
+
+      </div>
     </div>
   </section>
 </main>
+
+<!-- ── Bannière admin boutique fermée ──────────────────── -->
+<div class="gp-admin-bar" *ngIf="!shopOpen && isAdmin">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+  </svg>
+  {{ 'gallery.admin.bar' | t }}
+</div>

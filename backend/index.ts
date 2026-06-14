@@ -2,23 +2,29 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { type Application, type NextFunction, type Request, type Response } from 'express';
 import helmet from 'helmet';
-import * as db from 'db';
+import * as db from './db';
+import authRoutes from './src/routes/auth.route';
 import userRoutes from './src/routes/user.route';
 import collectionRoutes from './src/routes/collection.route';
 import productRoutes from './src/routes/product.route';
 import orderRoutes from './src/routes/order.route';
 import coachingRequestRoutes from './src/routes/coaching-request.route';
 import newsletterSubscriptionRoutes from './src/routes/newsletter-subscription.route';
-
+import settingsRoutes from './src/routes/settings.route';
+import paymentRoutes from './src/routes/payment.route';
+import { webhookHandler } from './src/controllers/payment.controller';
 
 dotenv.config();
 
 const app: Application = express();
 const PORT = process.env.PORT;
 
-
 app.use(helmet());
 app.use(cors());
+
+// Stripe webhook needs raw body — register BEFORE express.json()
+app.post('/payments/webhook', express.raw({ type: 'application/json' }), webhookHandler);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -32,12 +38,15 @@ app.use((req: Request, _res: Response, next: NextFunction) => {
 console.log('DEBUG: userRoutes type:', typeof userRoutes);
 console.log('DEBUG: userRoutes:', userRoutes);
 
+app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/collections', collectionRoutes);
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
 app.use('/coaching-requests', coachingRequestRoutes);
 app.use('/newsletter-subscriptions', newsletterSubscriptionRoutes);
+app.use('/settings', settingsRoutes);
+app.use('/payments', paymentRoutes);
 
 // diagnostic route to verify which users handler is active
 app.get('/users/check', (req: Request, res: Response) => {

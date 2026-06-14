@@ -2,6 +2,7 @@ import type { Request, Response } from 'express';
 import {
   getAllProducts,
   getProductById,
+  getProductBySlug,
   createProduct,
   updateProduct,
   deleteProduct,
@@ -29,6 +30,21 @@ export const getProduct = async (req: Request, res: Response) => {
       return;
     }
     console.error(`Error fetching product ${id}:`, error);
+    res.status(500).json({ error: 'An error occurred while fetching the product' });
+  }
+};
+
+export const getProductBySlugHandler = async (req: Request, res: Response) => {
+  const { slug } = req.params;
+  try {
+    const product = await getProductBySlug(slug);
+    res.json(product);
+  } catch (error) {
+    if ((error as Error).message === 'Product not found') {
+      res.status(404).json({ error: 'Product not found' });
+      return;
+    }
+    console.error(`Error fetching product slug=${slug}:`, error);
     res.status(500).json({ error: 'An error occurred while fetching the product' });
   }
 };

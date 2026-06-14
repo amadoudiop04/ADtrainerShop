@@ -1,47 +1,32 @@
-<header id="hdr" class="ip-header scrolled">
-  <a href="/" class="ip-logo">
-    <img src="LogoADTrainer-removebg-preview.png" alt="ADtrainer Shop" class="ip-logo-img" />
-  </a>
-
-  <nav class="ip-nav">
-    <a href="/" class="ip-nav-link">Overview</a>
-    <a href="/gallery" class="ip-nav-link">Gallery</a>
-    <a href="/infos" class="ip-nav-link active">Infos</a>
-  </nav>
-
-  <div class="ip-header-right">
-    <button type="button" class="ip-lang-btn" (click)="toggleLanguage()" [attr.aria-label]="'Changer la langue: ' + languageLabel">
-      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.1">
-        <circle cx="7" cy="7" r="5.8"/>
-        <ellipse cx="7" cy="7" rx="2.6" ry="5.8"/>
-        <line x1="1.2" y1="7" x2="12.8" y2="7"/>
-        <line x1="7" y1="1.2" x2="7" y2="12.8"/>
-      </svg>
-      {{ languageLabel }}
-    </button>
-    <a [href]="accountHref" class="ip-account-btn">{{ accountLabel }}</a>
-  </div>
-</header>
+<app-site-header></app-site-header>
 
 <main class="ip-page">
   <section class="ip-hero" aria-labelledby="info-title">
-    <p class="ip-pill">Performance ecosystem</p>
-    <h1 id="info-title">Session</h1>
-    <p class="ip-subtitle">Ameliore ta sante en te sculptant une armure</p>
+    <p class="ip-pill">{{ 'info.pill' | t }}</p>
+    <h1 id="info-title">{{ 'info.hero.title' | t }}</h1>
+    <p class="ip-subtitle">{{ 'info.hero.subtitle' | t }}</p>
 
     <div class="ip-card-grid">
       <article class="ip-session-card ip-card-coaching">
-        <img src="IMG_0583.jpeg" alt="Private coaching session" />
+        <img src="IMG_0583.jpeg" alt="Coaching 1:1 ADtrainer" />
         <div class="ip-card-shade"></div>
         <div class="ip-card-content">
           <p class="ip-card-kicker">
             <span class="ip-person-icon"></span>
-            Exclusive 1:1
+            {{ 'info.coaching.kicker' | t }}
           </p>
-          <h2>1.1 coaching</h2>
-          <p>Tailored elite-level mentorship for those seeking absolute precision in their physical evolution.</p>
+          <h2>{{ 'info.coaching.title' | t }}</h2>
+          <p>{{ 'info.coaching.desc' | t }}</p>
+
+          <ul class="ip-card-features">
+            <li>{{ 'info.coaching.f1' | t }}</li>
+            <li>{{ 'info.coaching.f2' | t }}</li>
+            <li>{{ 'info.coaching.f3' | t }}</li>
+            <li>{{ 'info.coaching.f4' | t }}</li>
+          </ul>
+
           <button type="button" class="ip-card-btn" (click)="openContactForm('Coaching 1:1')">
-            Explore program
+            {{ 'info.coaching.btn' | t }}
             <span></span>
           </button>
         </div>
@@ -58,12 +43,20 @@
         <div class="ip-card-content">
           <p class="ip-card-kicker">
             <span class="ip-cloud-icon"></span>
-            Digital mastery
+            {{ 'info.ecoaching.kicker' | t }}
           </p>
-          <h2>E-coaching</h2>
-          <p>Remote performance protocols delivered through our bespoke digital ecosystem. Unbound by location.</p>
+          <h2>{{ 'info.ecoaching.title' | t }}</h2>
+          <p>{{ 'info.ecoaching.desc' | t }}</p>
+
+          <ul class="ip-card-features">
+            <li>{{ 'info.ecoaching.f1' | t }}</li>
+            <li>{{ 'info.ecoaching.f2' | t }}</li>
+            <li>{{ 'info.ecoaching.f3' | t }}</li>
+            <li>{{ 'info.ecoaching.f4' | t }}</li>
+          </ul>
+
           <button type="button" class="ip-card-btn ip-card-btn-dark" (click)="openContactForm('E-coaching')">
-            Join ecosystem
+            {{ 'info.ecoaching.btn' | t }}
             <span></span>
           </button>
         </div>
@@ -76,23 +69,28 @@
   <section class="ip-contact-modal" *ngIf="isContactFormOpen" aria-label="Formulaire de contact coaching">
     <button type="button" class="ip-contact-close" (click)="closeContactForm()" aria-label="Fermer le formulaire"></button>
 
-    <p class="ip-contact-kicker">Demande de session</p>
-    <h2>Contact</h2>
-    <p class="ip-contact-copy">Laisse tes informations, on revient vers toi pour caler le format et les disponibilites.</p>
+    <p class="ip-contact-kicker">{{ 'info.contact.kicker' | t }}</p>
+    <h2>{{ 'info.contact.title' | t }}</h2>
+    <p class="ip-contact-copy">{{ 'info.contact.copy' | t }}</p>
 
-    <form class="ip-contact-form">
+    <form class="ip-contact-form" #contactForm (ngSubmit)="submitCoachingRequest(contactForm)">
       <label>
-        <span>Nom et Prenom</span>
-        <input type="text" name="fullName" autocomplete="name" placeholder="Ex: ..........." required />
+        <span>{{ 'info.contact.fullName' | t }}</span>
+        <input type="text" name="fullName" autocomplete="name" placeholder="Ex: John Doe" required />
       </label>
 
       <label>
-        <span>Numero de telephone</span>
-        <input type="tel" name="phone" autocomplete="tel" placeholder="Ex: +33 6 12 34 56 78" required />
+        <span>{{ 'info.contact.email' | t }}</span>
+        <input type="email" name="email" autocomplete="email" placeholder="Ex: john@example.com" required />
       </label>
 
       <label>
-        <span>Service souhaite</span>
+        <span>{{ 'info.contact.phone' | t }}</span>
+        <input type="tel" name="phone" autocomplete="tel" placeholder="Ex: +33 6 12 34 56 78" />
+      </label>
+
+      <label>
+        <span>{{ 'info.contact.service' | t }}</span>
         <select name="service" [value]="selectedService" required>
           <option>Coaching 1:1</option>
           <option>E-coaching</option>
@@ -100,11 +98,16 @@
       </label>
 
       <label>
-        <span>Disponibilites</span>
-        <textarea name="availability" rows="4" placeholder="Ex: lundi soir, mercredi matin, week-end..." required></textarea>
+        <span>{{ 'info.contact.availability' | t }}</span>
+        <textarea name="availability" rows="3" placeholder="Ex: lundi soir, mercredi matin, week-end..."></textarea>
       </label>
 
-      <button type="submit" class="ip-submit-btn">Envoyer la demande</button>
+      <p *ngIf="formError" class="ip-form-error">{{ formError }}</p>
+      <p *ngIf="formSuccess" class="ip-form-success">{{ 'info.contact.success' | t }}</p>
+
+      <button type="submit" class="ip-submit-btn" [disabled]="isSubmitting">
+        {{ isSubmitting ? ('info.contact.loading' | t) : ('info.contact.submit' | t) }}
+      </button>
     </form>
   </section>
 </main>

@@ -1,0 +1,114 @@
+$cream: #f0ede8;
+$ink: #0a0a0a;
+$amber: #c89448;
+
+@mixin condensed($size: 11px, $tracking: 0.22em) {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: $size;
+  letter-spacing: $tracking;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+@mixin playfair { font-family: 'Playfair Display', serif; }
+
+@mixin barlow($weight: 300) {
+  font-family: 'Barlow', sans-serif;
+  font-weight: $weight;
+}
+
+.ps-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(200, 148, 72, 0.07), transparent 32%),
+    #111111;
+  color: $cream;
+  padding: 100px 24px 60px;
+}
+
+.ps-inner {
+  width: min(100%, 540px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.ps-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(120, 200, 140, 0.08);
+  border: 1px solid rgba(120, 200, 140, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(120, 200, 140, 0.85);
+  margin-bottom: 8px;
+  box-shadow: 0 0 32px rgba(120, 200, 140, 0.1);
+}
+
+.ps-kicker {
+  @include condensed(10px, 0.2em);
+  color: rgba(120, 200, 140, 0.7);
+  margin: 0;
+}
+
+.ps-title {
+  @include playfair;
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 400;
+  color: $cream;
+  margin: 0;
+  line-height: 0.95;
+}
+
+.ps-copy {
+  @include barlow(300);
+  font-size: 0.92rem;
+  color: rgba(240, 237, 232, 0.5);
+  line-height: 1.72;
+  max-width: 420px;
+  margin: 4px 0 8px;
+}
+
+.ps-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 280px;
+  margin-top: 8px;
+}
+
+.ps-btn-primary {
+  @include condensed(11px, 0.18em);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  color: $ink;
+  background: $cream;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+  &:hover { opacity: 0.85; }
+}
+
+.ps-btn-secondary {
+  @include condensed(11px, 0.18em);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  color: $cream;
+  background: transparent;
+  border: 0.5px solid rgba(240, 237, 232, 0.22);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: border-color 0.2s;
+  &:hover { border-color: rgba(240, 237, 232, 0.5); }
+}

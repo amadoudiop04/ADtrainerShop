@@ -1,6 +1,7 @@
 $cream: #f0ede8;
 $ink: #0a0a0a;
-$border: rgba(240, 237, 232, 0.07);
+$border: rgba(240, 237, 232, 0.10);
+$warm:  rgba(200, 148, 72, 0.12);
 
 @mixin condensed($size: 11px, $tracking: 0.22em) {
   font-family: 'Barlow Condensed', sans-serif;
@@ -42,23 +43,22 @@ $border: rgba(240, 237, 232, 0.07);
 }
 
 .lp-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
-  flex-shrink: 0;
   text-decoration: none;
 }
 
 .lp-logo-img {
-  width: 48px;
-  height: 48px;
+  width: 62px;
+  height: 62px;
   object-fit: contain;
   display: block;
 }
 
 .lp-nav {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 32px;
@@ -131,10 +131,94 @@ $border: rgba(240, 237, 232, 0.07);
   }
 }
 
+/* ── Boutique fermée ────────────────────────────────────── */
+.gp-closed {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #111111;
+  color: $cream;
+  padding-top: 88px;
+}
+
+.gp-closed-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 48px 24px;
+  max-width: 480px;
+
+  svg {
+    color: rgba(200, 148, 72, 0.4);
+    margin-bottom: 28px;
+  }
+}
+
+.gp-closed-kicker {
+  @include condensed(10px, 0.2em);
+  color: rgba(200, 148, 72, 0.7);
+  margin: 0 0 14px;
+}
+
+.gp-closed-title {
+  @include playfair;
+  font-size: clamp(2.8rem, 7vw, 5rem);
+  font-weight: 400;
+  color: $cream;
+  margin: 0 0 20px;
+  line-height: 0.92;
+}
+
+.gp-closed-copy {
+  @include barlow(300);
+  font-size: 0.92rem;
+  color: rgba(240, 237, 232, 0.5);
+  line-height: 1.7;
+  margin: 0 0 32px;
+}
+
+.gp-closed-btn {
+  @include condensed(11px, 0.2em);
+  color: #0a0a0a;
+  background: $cream;
+  border-radius: 999px;
+  padding: 13px 28px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+  &:hover { opacity: 0.85; }
+}
+
+/* ── Bannière admin ─────────────────────────────────────── */
+.gp-admin-bar {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  background: rgba(200, 148, 72, 0.12);
+  border: 0.5px solid rgba(200, 148, 72, 0.35);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+  @include barlow(300);
+  font-size: 0.84rem;
+  color: rgba(240, 237, 232, 0.75);
+  white-space: nowrap;
+
+  strong { color: rgba(200, 148, 72, 0.9); font-weight: 400; }
+
+  svg { color: rgba(200, 148, 72, 0.6); flex-shrink: 0; }
+}
+
 .gp-gallery {
   background:
-    radial-gradient(circle at 50% 38%, rgba(240, 237, 232, 0.055), transparent 28%),
-    linear-gradient(180deg, #111 0%, #111 58%, #0b0b0b 58%, #0b0b0b 100%);
+    radial-gradient(circle at 50% 38%, rgba(200, 148, 72, 0.08), transparent 32%),
+    radial-gradient(circle at 50% 38%, rgba(240, 237, 232, 0.07), transparent 26%),
+    linear-gradient(180deg, #1a1a1a 0%, #1a1a1a 58%, #151515 58%, #151515 100%);
   color: $cream;
   overflow: hidden;
 }
@@ -174,8 +258,11 @@ $border: rgba(240, 237, 232, 0.07);
   gap: clamp(22px, 3.4vw, 54px);
   padding: clamp(20px, 3.4vw, 42px);
   background:
-    radial-gradient(circle at 75% 20%, rgba(240, 237, 232, 0.1), transparent 24%),
-    linear-gradient(135deg, #151515 0%, #090909 100%);
+    radial-gradient(circle at 75% 20%, rgba(200, 148, 72, 0.10), transparent 28%),
+    radial-gradient(circle at 75% 20%, rgba(240, 237, 232, 0.07), transparent 22%),
+    linear-gradient(135deg, #202020 0%, #111111 100%);
+  border: 0.5px solid rgba(240, 237, 232, 0.08);
+  border-radius: 4px;
   overflow: hidden;
 }
 
@@ -186,7 +273,7 @@ $border: rgba(240, 237, 232, 0.07);
 
 .gp-scroll-copy span {
   @include condensed(10px, 0.18em);
-  color: rgba(240, 237, 232, 0.38);
+  color: rgba(200, 148, 72, 0.85);
 }
 
 .gp-scroll-copy h2 {
@@ -200,7 +287,7 @@ $border: rgba(240, 237, 232, 0.07);
 
 .gp-scroll-copy p {
   @include barlow(300);
-  color: rgba(240, 237, 232, 0.52);
+  color: rgba(240, 237, 232, 0.65);
   font-size: 0.88rem;
   line-height: 1.8;
 }
@@ -211,6 +298,24 @@ $border: rgba(240, 237, 232, 0.07);
   gap: clamp(10px, 1.45vw, 16px);
   align-content: center;
   min-height: 0;
+}
+
+.gp-empty {
+  grid-column: 1 / -1;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(240, 237, 232, 0.35);
+  text-align: center;
+  padding: 32px 0;
+}
+
+.gp-error {
+  grid-column: 1 / -1;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.85rem;
+  color: rgba(220, 80, 80, 0.75);
+  text-align: center;
+  padding: 32px 0;
 }
 
 .gp-phone {
@@ -331,9 +436,15 @@ $border: rgba(240, 237, 232, 0.07);
   min-width: 0;
   text-decoration: none;
   padding: 8px;
-  border: 1px solid rgba(240, 237, 232, 0.08);
+  border: 1px solid rgba(240, 237, 232, 0.10);
   border-radius: 14px;
-  background: rgba(240, 237, 232, 0.035);
+  background: rgba(240, 237, 232, 0.04);
+  transition: border-color 0.25s, background 0.25s;
+
+  &:hover {
+    border-color: rgba(200, 148, 72, 0.35);
+    background: rgba(200, 148, 72, 0.06);
+  }
 
   span,
   strong {
@@ -345,7 +456,7 @@ $border: rgba(240, 237, 232, 0.07);
   span {
     @include condensed(7px, 0.07em);
     margin-top: 7px;
-    color: rgba(240, 237, 232, 0.72);
+    color: rgba(240, 237, 232, 0.75);
   }
 
   strong {
@@ -360,14 +471,21 @@ $border: rgba(240, 237, 232, 0.07);
   height: clamp(108px, 12.4vw, 148px);
   overflow: hidden;
   border-radius: 8px;
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.11), transparent 34%),
-    linear-gradient(180deg, #282828 0%, #0f0f0f 100%);
+  background: #1e1e1e;
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    filter: grayscale(0.3) contrast(1.05) brightness(0.85);
+    transition: transform 0.5s ease, filter 0.5s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.06);
+    filter: grayscale(0) contrast(1.05) brightness(0.9);
   }
 }
 
@@ -491,6 +609,12 @@ $border: rgba(240, 237, 232, 0.07);
 }
 
 .gp-journal {
+  width: 100%;
+  background: #0e0e0e;
+  border-top: 0.5px solid rgba(240, 237, 232, 0.07);
+}
+
+.gp-journal-inner {
   width: min(100%, 1180px);
   margin: 0 auto;
   padding: 0 24px 116px;
@@ -500,9 +624,20 @@ $border: rgba(240, 237, 232, 0.07);
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  border-top: 1px solid rgba(240, 237, 232, 0.12);
+  border-top: 1px solid rgba(240, 237, 232, 0.14);
   padding-top: 46px;
-  margin-bottom: 28px;
+  margin-bottom: 36px;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 64px;
+    height: 1px;
+    background: rgba(200, 148, 72, 0.75);
+  }
 }
 
 .gp-journal-head h2 {
@@ -517,7 +652,7 @@ $border: rgba(240, 237, 232, 0.07);
 .gp-journal-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 42px 18px;
+  gap: 48px 24px;
 }
 
 .gp-journal-card {
@@ -534,7 +669,8 @@ $border: rgba(240, 237, 232, 0.07);
   aspect-ratio: 0.78;
   margin: 0;
   overflow: hidden;
-  background: #151515;
+  background: #1e1e1e;
+  border-radius: 3px;
 }
 
 .gp-journal-card img,
@@ -563,16 +699,20 @@ $border: rgba(240, 237, 232, 0.07);
 
 .gp-journal-card:hover img,
 .gp-journal-card:hover .gp-art-card {
-  transform: scale(1.035);
-  filter: grayscale(0.25) contrast(1.12) brightness(0.88);
+  transform: scale(1.04);
+  filter: grayscale(0) contrast(1.08) brightness(0.92);
 }
 
-.gp-journal-featured {
-  grid-column: span 2;
-}
 
-.gp-journal-featured figure {
-  aspect-ratio: 1.68;
+.gp-journal-tag {
+  @include condensed(9px, 0.16em);
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 4px 10px;
+  border: 0.5px solid rgba(200, 148, 72, 0.35);
+  border-radius: 100px;
+  color: rgba(200, 148, 72, 0.85);
+  background: rgba(200, 148, 72, 0.06);
 }
 
 .gp-journal-meta {
@@ -590,7 +730,7 @@ $border: rgba(240, 237, 232, 0.07);
 
 .gp-journal-meta time {
   @include condensed(10px, 0.14em);
-  color: rgba(240, 237, 232, 0.42);
+  color: rgba(200, 148, 72, 0.70);
 }
 
 .gp-art-card {
@@ -601,9 +741,10 @@ $border: rgba(240, 237, 232, 0.07);
 
 .gp-art-run {
   background:
-    radial-gradient(ellipse at 52% 78%, rgba(240, 237, 232, 0.22), transparent 34%),
-    linear-gradient(145deg, transparent 0 44%, rgba(240, 237, 232, 0.38) 45% 47%, transparent 48%),
-    linear-gradient(180deg, #242424 0%, #0e0e0e 100%);
+    radial-gradient(ellipse at 52% 78%, rgba(200, 148, 72, 0.18), transparent 38%),
+    radial-gradient(ellipse at 52% 78%, rgba(240, 237, 232, 0.18), transparent 32%),
+    linear-gradient(145deg, transparent 0 44%, rgba(240, 237, 232, 0.32) 45% 47%, transparent 48%),
+    linear-gradient(180deg, #2e2e2e 0%, #141414 100%);
 }
 
 .gp-art-run::before {
@@ -614,14 +755,15 @@ $border: rgba(240, 237, 232, 0.07);
   width: 78%;
   height: 22%;
   border-radius: 60% 24% 18% 16%;
-  background: linear-gradient(135deg, #c8c8c8, #191919 66%);
+  background: linear-gradient(135deg, #d4d4d4, #282828 66%);
   transform: rotate(-11deg);
 }
 
 .gp-art-elite {
   background:
-    radial-gradient(circle at 50% 18%, rgba(240, 237, 232, 0.2), transparent 16%),
-    linear-gradient(90deg, #0f0f0f, #565656 48%, #101010);
+    radial-gradient(circle at 50% 18%, rgba(200, 148, 72, 0.14), transparent 22%),
+    radial-gradient(circle at 50% 18%, rgba(240, 237, 232, 0.16), transparent 16%),
+    linear-gradient(90deg, #141414, #686868 48%, #141414);
 }
 
 .gp-art-elite::before {
@@ -633,22 +775,23 @@ $border: rgba(240, 237, 232, 0.07);
   height: 76%;
   border-radius: 38% 38% 10px 10px;
   background:
-    radial-gradient(circle at 50% 17%, #080808 0 14%, transparent 15%),
-    linear-gradient(90deg, #151515, #5f5f5f 50%, #111);
+    radial-gradient(circle at 50% 17%, #0a0a0a 0 14%, transparent 15%),
+    linear-gradient(90deg, #1a1a1a, #6e6e6e 50%, #161616);
 }
 
 .gp-art-valencia {
   background:
-    linear-gradient(120deg, rgba(240, 237, 232, 0.24), transparent 40%),
-    radial-gradient(circle at 62% 36%, rgba(118, 78, 48, 0.38), transparent 30%),
-    linear-gradient(180deg, #211c18, #090909);
+    linear-gradient(120deg, rgba(240, 237, 232, 0.22), transparent 40%),
+    radial-gradient(circle at 62% 36%, rgba(180, 110, 55, 0.55), transparent 34%),
+    radial-gradient(circle at 30% 70%, rgba(120, 70, 30, 0.30), transparent 28%),
+    linear-gradient(180deg, #2a1e14, #0e0a06);
 }
 
 .gp-art-valencia::before {
   content: '';
   position: absolute;
   inset: 18% 24%;
-  border: 2px solid rgba(240, 237, 232, 0.28);
+  border: 2px solid rgba(200, 148, 72, 0.40);
   border-radius: 50% 50% 44% 44%;
 }
 
@@ -757,7 +900,7 @@ $border: rgba(240, 237, 232, 0.07);
     font-size: 9px;
   }
 
-  .gp-journal {
+  .gp-journal-inner {
     padding: 0 18px 86px;
   }
 
@@ -770,11 +913,6 @@ $border: rgba(240, 237, 232, 0.07);
     gap: 34px;
   }
 
-  .gp-journal-featured {
-    grid-column: span 1;
-  }
-
-  .gp-journal-featured figure,
   .gp-journal-card figure {
     aspect-ratio: 0.9;
   }

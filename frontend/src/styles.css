@@ -9,11 +9,12 @@
 
   body {
 
-    @apply min-h-screen bg-slate-950 text-slate-100 antialiased;
+    @apply min-h-screen text-slate-100 antialiased;
+    background-color: #141414;
     font-family: 'Barlow', sans-serif;
     overflow-x: hidden;
     scrollbar-width: thin;
-    scrollbar-color: rgba(240, 237, 232, 0.28) #0a0a0a;
+    scrollbar-color: rgba(240, 237, 232, 0.28) #141414;
   }
 
   * {

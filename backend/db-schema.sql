@@ -39,21 +39,16 @@ CREATE TABLE IF NOT EXISTS products (
   stock INTEGER NOT NULL DEFAULT 0 CHECK (stock >= 0),
   sku TEXT UNIQUE,
   image_url TEXT,
+  image_url_2 TEXT,
+  image_url_3 TEXT,
+  image_url_4 TEXT,
   status TEXT NOT NULL DEFAULT 'available' CHECK (status IN ('available', 'out_of_stock', 'archived')),
+  available_sizes JSONB NOT NULL DEFAULT '["XS","S","M","L","XL","XXL"]',
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE IF NOT EXISTS product_images (
-  image_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  product_id UUID NOT NULL REFERENCES products(product_id) ON DELETE CASCADE,
-  url TEXT NOT NULL,
-  alt_text TEXT,
-  display_order INTEGER NOT NULL DEFAULT 0,
-  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-);
-
--- Commandes et lignes de commande
+-- Commandes
 CREATE TABLE IF NOT EXISTS orders (
   order_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   user_id UUID NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
@@ -64,17 +59,20 @@ CREATE TABLE IF NOT EXISTS orders (
   status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'paid', 'shipped', 'completed', 'cancelled', 'refunded')),
   payment_method TEXT CHECK (payment_method IN ('card', 'paypal', 'bank_transfer', 'cash_on_delivery')),
   payment_status TEXT NOT NULL DEFAULT 'pending' CHECK (payment_status IN ('pending', 'paid', 'failed', 'refunded')),
+  stripe_session_id TEXT,
   placed_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+-- Articles d'une commande
 CREATE TABLE IF NOT EXISTS order_items (
   order_item_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   order_id UUID NOT NULL REFERENCES orders(order_id) ON DELETE CASCADE,
   product_id UUID NOT NULL REFERENCES products(product_id),
   quantity INTEGER NOT NULL CHECK (quantity > 0),
-  unit_price NUMERIC(10,2) NOT NULL CHECK (unit_price >= 0),
-  total_price NUMERIC(10,2) NOT NULL GENERATED ALWAYS AS (quantity * unit_price) STORED
+  size TEXT,
+  unit_price NUMERIC(10,2) NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 -- Panier temporaire (facultatif)

@@ -9,6 +9,12 @@ export const getAllProducts = async (): Promise<ProductType[]> => {
   }
 };
 
+export const getProductBySlug = async (slug: string): Promise<ProductType> => {
+  const product = await Product.findBySlug(slug);
+  if (!product) throw new Error('Product not found');
+  return product;
+};
+
 export const getProductById = async (id: string): Promise<ProductType> => {
   try {
     const product = await Product.findByPk(id);

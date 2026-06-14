@@ -1,0 +1,256 @@
+<app-site-header></app-site-header>
+
+<!-- ══════════════════════════════ FAQ ═══════════════════════ -->
+<main class="sp-page" *ngIf="page === 'faq'">
+  <section class="sp-hero">
+    <p class="sp-kicker">Aide &amp; Support</p>
+    <h1>FAQ</h1>
+    <p class="sp-subtitle">Les réponses aux questions les plus fréquentes.</p>
+  </section>
+
+  <section class="sp-content">
+    <div class="sp-faq-grid">
+
+      <div class="sp-faq-col">
+        <h2 class="sp-faq-group">Commandes &amp; Livraison</h2>
+
+        <details class="sp-faq-item">
+          <summary>Quels sont les délais de livraison ?</summary>
+          <p>2 à 5 jours ouvrés en France métropolitaine. La livraison internationale est disponible selon les zones — comptez 5 à 14 jours ouvrés.</p>
+        </details>
+        <details class="sp-faq-item">
+          <summary>Comment suivre ma commande ?</summary>
+          <p>Un email de confirmation avec un numéro de suivi vous est envoyé dès l'expédition. Vous pouvez suivre l'acheminement directement depuis le site du transporteur.</p>
+        </details>
+        <details class="sp-faq-item">
+          <summary>Puis-je modifier ma commande après validation ?</summary>
+          <p>Vous pouvez modifier votre commande dans les 2 heures suivant la validation, en contactant notre service client à contact&#64;adtrainershop.com.</p>
+        </details>
+        <details class="sp-faq-item">
+          <summary>La livraison est-elle gratuite ?</summary>
+          <p>La livraison est offerte pour toute commande supérieure à 100€ en France. En dessous de ce montant, des frais de port s'appliquent selon le transporteur.</p>
+        </details>
+      </div>
+
+      <div class="sp-faq-col">
+        <h2 class="sp-faq-group">Produits &amp; Tailles</h2>
+
+        <details class="sp-faq-item">
+          <summary>Comment choisir ma taille ?</summary>
+          <p>Un guide des tailles est disponible sur chaque page produit. En cas de doute entre deux tailles, optez pour la taille supérieure. N'hésitez pas à nous contacter pour des conseils personnalisés.</p>
+        </details>
+        <details class="sp-faq-item">
+          <summary>Les produits sont-ils disponibles en boutique ?</summary>
+          <p>ADtrainer Shop est exclusivement en ligne. Tous les articles sont disponibles sur notre boutique digitale et expédiés depuis nos entrepôts en France.</p>
+        </details>
+        <details class="sp-faq-item">
+          <summary>Les coloris et stocks sont-ils mis à jour en temps réel ?</summary>
+          <p>Oui, les stocks sont actualisés en temps réel. Si un article est affiché disponible, il peut être commandé immédiatement.</p>
+        </details>
+        <details class="sp-faq-item">
+          <summary>Puis-je être alerté lorsqu'un produit est de retour en stock ?</summary>
+          <p>Oui, utilisez le bouton "M'alerter" sur la fiche produit. Vous recevrez un email dès que l'article est à nouveau disponible.</p>
+        </details>
+      </div>
+
+      <div class="sp-faq-col">
+        <h2 class="sp-faq-group">Compte &amp; Paiement</h2>
+
+        <details class="sp-faq-item">
+          <summary>Est-ce que je dois créer un compte pour commander ?</summary>
+          <p>Un compte est requis pour accéder à l'historique de vos commandes et à votre espace personnel. La création est rapide et sécurisée.</p>
+        </details>
+        <details class="sp-faq-item">
+          <summary>Quels modes de paiement acceptez-vous ?</summary>
+          <p>Nous acceptons les cartes bancaires (Visa, Mastercard, Amex), PayPal et Apple Pay. Tous les paiements sont sécurisés par SSL.</p>
+        </details>
+        <details class="sp-faq-item">
+          <summary>Comment modifier mon mot de passe ?</summary>
+          <p>Depuis votre espace profil, cliquez sur "Modifier le profil". Vous pouvez aussi utiliser la fonction "Mot de passe oublié" depuis la page de connexion.</p>
+        </details>
+        <details class="sp-faq-item">
+          <summary>Mes données personnelles sont-elles sécurisées ?</summary>
+          <p>Vos données sont traitées conformément au RGPD. Elles ne sont ni vendues ni partagées avec des tiers. Consultez notre politique de confidentialité pour les détails.</p>
+        </details>
+      </div>
+
+    </div>
+
+    <div class="sp-faq-cta">
+      <p>Vous ne trouvez pas la réponse à votre question ?</p>
+      <a href="/contact" class="sp-cta-btn">Contacter le support →</a>
+    </div>
+  </section>
+</main>
+
+<!-- ══════════════════════════ CONTACT ═══════════════════ -->
+<main class="sp-page" *ngIf="page === 'contact'">
+  <section class="sp-hero">
+    <p class="sp-kicker">Service client</p>
+    <h1>Contact</h1>
+    <p class="sp-subtitle">Notre équipe est disponible pour vous aider.</p>
+  </section>
+
+  <section class="sp-content">
+    <div class="sp-contact-grid">
+
+      <div class="sp-contact-card">
+        <div class="sp-contact-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <h3>Email</h3>
+        <p>Pour toute question générale, réclamation ou demande d'information sur nos produits.</p>
+        <a href="mailto:contact@adtrainershop.com" class="sp-contact-link">contact&#64;adtrainershop.com</a>
+        <span class="sp-contact-delay">Réponse sous 24-48h ouvrées</span>
+      </div>
+
+      <div class="sp-contact-card">
+        <div class="sp-contact-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <h3>Instagram</h3>
+        <p>Rejoignez notre communauté, découvrez les dernières collections et posez vos questions en DM.</p>
+        <a href="https://instagram.com/adtrainershop" target="_blank" rel="noopener" class="sp-contact-link">&#64;adtrainershop</a>
+        <span class="sp-contact-delay">DM ouverts · réponse rapide</span>
+      </div>
+
+      <div class="sp-contact-card">
+        <div class="sp-contact-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.06 4.24 2 2 0 012.03 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l1.27-.85a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+          </svg>
+        </div>
+        <h3>Coaching</h3>
+        <p>Pour les demandes spécifiques au coaching 1:1 ou e-coaching, contactez directement notre équipe.</p>
+        <a href="mailto:coaching@adtrainershop.com" class="sp-contact-link">coaching&#64;adtrainershop.com</a>
+        <span class="sp-contact-delay">Réponse sous 48h ouvrées</span>
+      </div>
+
+      <div class="sp-contact-card">
+        <div class="sp-contact-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        <h3>Horaires</h3>
+        <p>Le service client est disponible aux horaires suivants pour traiter vos demandes dans les meilleurs délais.</p>
+        <div class="sp-hours">
+          <div><strong>Lun – Ven</strong><span>9h00 – 18h00</span></div>
+          <div><strong>Samedi</strong><span>10h00 – 14h00</span></div>
+          <div><strong>Dimanche</strong><span>Fermé</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<!-- ══════════════════════════ RETOURS ═══════════════════ -->
+<main class="sp-page" *ngIf="page === 'retours'">
+  <section class="sp-hero">
+    <p class="sp-kicker">Politique de retour</p>
+    <h1>Retours</h1>
+    <p class="sp-subtitle">Des retours simples, transparents et rapides.</p>
+  </section>
+
+  <section class="sp-content">
+
+    <div class="sp-retours-rules">
+      <div class="sp-retours-rule">
+        <div class="sp-rule-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Délai de retour</h3>
+          <p>Vous disposez de <strong>30 jours</strong> à compter de la date de réception de votre commande pour retourner un article.</p>
+        </div>
+      </div>
+
+      <div class="sp-retours-rule">
+        <div class="sp-rule-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <polyline points="9 11 12 14 22 4"/>
+            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+          </svg>
+        </div>
+        <div>
+          <h3>État de l'article</h3>
+          <p>L'article doit être retourné dans son <strong>état d'origine</strong> : non porté, non lavé, avec toutes ses étiquettes et son emballage d'origine intact.</p>
+        </div>
+      </div>
+
+      <div class="sp-retours-rule">
+        <div class="sp-rule-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <rect x="1" y="3" width="15" height="13" rx="1"/>
+            <path d="M16 8h4l3 3v5h-7V8z"/>
+            <circle cx="5.5" cy="18.5" r="2.5"/>
+            <circle cx="18.5" cy="18.5" r="2.5"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Frais de retour</h3>
+          <p>Les frais de retour sont à la <strong>charge du client</strong>, sauf en cas d'erreur de notre part (mauvais article expédié) ou d'article présentant un défaut de fabrication.</p>
+        </div>
+      </div>
+
+      <div class="sp-retours-rule">
+        <div class="sp-rule-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <line x1="12" y1="1" x2="12" y2="23"/>
+            <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Remboursement</h3>
+          <p>Le remboursement est effectué dans un délai de <strong>7 jours ouvrés</strong> après réception et contrôle de l'article retourné. Il est effectué sur le moyen de paiement utilisé lors de la commande.</p>
+        </div>
+      </div>
+
+      <div class="sp-retours-rule">
+        <div class="sp-rule-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Articles non retournables</h3>
+          <p>Pour des raisons d'hygiène, les articles portés, lavés ou sans étiquette ne peuvent pas être acceptés. Les articles en promotion ou soldés sont également exclus.</p>
+        </div>
+      </div>
+
+      <div class="sp-retours-rule">
+        <div class="sp-rule-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Échange</h3>
+          <p>Vous souhaitez un échange de taille ou de coloris ? Retournez l'article et passez une nouvelle commande. Nous traiterons le remboursement de votre retour simultanément.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sp-retours-cta">
+      <h3>Prêt à initier un retour ?</h3>
+      <p>Envoyez-nous un email avec votre numéro de commande et le motif du retour. Notre équipe vous guidera pour la suite.</p>
+      <a href="mailto:retours@adtrainershop.com" class="sp-cta-btn">Initier un retour →</a>
+    </div>
+
+  </section>
+</main>

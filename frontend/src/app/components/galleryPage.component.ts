@@ -1,48 +1,71 @@
-import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, NgFor, NgIf } from '@angular/common';
+import { SiteHeaderComponent } from './siteHeader.component';
 import { ContainerScrollComponent } from './containerScroll.component';
+import { ProductService, ApiProduct } from '../services/product.service';
+import { SettingsService } from '../services/settings.service';
+import { UserService } from '../services/user.service';
+import { TranslatePipe } from '../pipes/translate.pipe';
 
 @Component({
   selector: 'app-gallery-page',
   standalone: true,
-  imports: [ContainerScrollComponent],
+  imports: [SiteHeaderComponent, ContainerScrollComponent, NgFor, NgIf, TranslatePipe],
   templateUrl: '../pages/Gallery/galleryPage.page.html',
   styleUrls: ['../pages/Gallery/galleryPage.page.scss'],
 })
 export class GalleryPageComponent implements OnInit {
-  accountLabel = 'Account';
-  accountHref = '/login';
-  languageLabel = 'FR';
+  products: ApiProduct[] = [];
+  isLoadingProducts = true;
+  loadError = false;
+  shopOpen = true;
+  isAdmin = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private productService: ProductService,
+    private settingsService: SettingsService,
+    private userService: UserService,
+  ) {}
 
   ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
-    this.syncAccountLink();
-    this.syncLanguage();
+
+    const user = this.userService.getLocal();
+    this.isAdmin = user?.role === 'admin';
+
+    this.settingsService.getShopStatus().subscribe({
+      next: ({ open }) => {
+        this.shopOpen = open;
+        if (open || this.isAdmin) this.loadProducts();
+      },
+      error: () => {
+        // If we can't reach the API, assume open
+        this.shopOpen = true;
+        this.loadProducts();
+      },
+    });
   }
 
-  @HostListener('window:scroll', [])
-  onScroll(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    const hdr = document.getElementById('hdr');
-    if (!hdr) return;
-    hdr.classList.toggle('scrolled', window.scrollY > 60);
+  private loadProducts(): void {
+    this.productService.getAll().subscribe({
+      next: (data) => {
+        this.products = data;
+        this.isLoadingProducts = false;
+      },
+      error: () => {
+        this.loadError = true;
+        this.isLoadingProducts = false;
+      },
+    });
   }
 
-  private syncAccountLink(): void {
-    const isLoggedIn = !!localStorage.getItem('adtrainer_user');
-    this.accountLabel = isLoggedIn ? 'Profile' : 'Account';
-    this.accountHref = isLoggedIn ? '/profile' : '/login';
+  formatPrice(price: number): string {
+    return `€${price.toFixed(0)}`;
   }
 
-  toggleLanguage(): void {
-    if (!isPlatformBrowser(this.platformId)) return;
-    this.languageLabel = this.languageLabel === 'FR' ? 'EN' : 'FR';
-    localStorage.setItem('adtrainer_language', this.languageLabel);
+  getImageUrl(product: ApiProduct): string {
+    return product.image_url ?? 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=320&fit=crop&q=80';
   }
 
-  private syncLanguage(): void {
-    this.languageLabel = localStorage.getItem('adtrainer_language') || 'FR';
-  }
 }

@@ -1,0 +1,89 @@
+<div class="cd-backdrop" (click)="close()" aria-hidden="true"></div>
+
+<aside class="cd-panel" role="dialog" [attr.aria-label]="'cart.title' | t">
+
+  <!-- Header -->
+  <div class="cd-header">
+    <div class="cd-header-left">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+        <path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.98-1.61L23 6H6"/>
+      </svg>
+      <span class="cd-title">{{ 'cart.title' | t }}</span>
+      <span class="cd-count" *ngIf="count() > 0">{{ count() }}</span>
+    </div>
+    <button class="cd-close" (click)="close()" [attr.aria-label]="'cart.title' | t">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Empty state -->
+  <div class="cd-empty" *ngIf="items().length === 0">
+    <div class="cd-empty-icon" aria-hidden="true">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+        <path d="M1 1h4l2.68 13.39a2 2 0 001.98 1.61h9.72a2 2 0 001.98-1.61L23 6H6"/>
+      </svg>
+    </div>
+    <p class="cd-empty-msg">{{ 'cart.empty' | t }}</p>
+    <p class="cd-empty-sub">{{ 'cart.emptySub' | t }}</p>
+    <a href="/gallery" class="cd-shop-link" (click)="close()">{{ 'cart.explore' | t }}</a>
+  </div>
+
+  <!-- Item list -->
+  <ul class="cd-list" *ngIf="items().length > 0">
+    <li class="cd-item" *ngFor="let item of items()">
+      <div class="cd-item-img">
+        <img *ngIf="item.imageUrl" [src]="item.imageUrl" [alt]="item.name" />
+        <div *ngIf="!item.imageUrl" class="cd-item-placeholder" aria-hidden="true"></div>
+      </div>
+      <div class="cd-item-info">
+        <p class="cd-item-name">{{ item.name }}</p>
+        <p class="cd-item-meta">
+          <span class="cd-item-size">{{ item.size }}</span>
+          <span class="cd-item-price">€{{ (item.price * item.quantity).toFixed(2) }}</span>
+        </p>
+        <div class="cd-qty">
+          <button class="cd-qty-btn" (click)="decrement(item)" aria-label="−">−</button>
+          <span class="cd-qty-val">{{ item.quantity }}</span>
+          <button class="cd-qty-btn" (click)="increment(item)" aria-label="+">+</button>
+        </div>
+      </div>
+      <button class="cd-remove" (click)="remove(item)" aria-label="Supprimer">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/>
+          <path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/>
+        </svg>
+      </button>
+    </li>
+  </ul>
+
+  <!-- Footer -->
+  <div class="cd-footer" *ngIf="items().length > 0">
+    <div class="cd-total-row">
+      <span class="cd-total-label">{{ 'cart.total' | t }}</span>
+      <span class="cd-total-amount">€{{ total().toFixed(2) }}</span>
+    </div>
+    <p class="cd-shipping-note">{{ 'cart.shipping' | t }}</p>
+
+    <button
+      class="cd-checkout-btn"
+      [class.cd-checkout-btn--locked]="!user"
+      [disabled]="isCheckingOut || !user"
+      (click)="checkout()"
+    >
+      <span *ngIf="!isCheckingOut && user">{{ 'cart.checkout' | t }}</span>
+      <span *ngIf="!user">{{ 'cart.checkout.login' | t }}</span>
+      <span *ngIf="isCheckingOut" class="cd-spinner">{{ 'cart.checkout.loading' | t }}</span>
+    </button>
+
+    <p class="cd-login-notice" *ngIf="!user">
+      <a href="/login" (click)="close()">{{ 'cart.loginLink' | t }}</a> {{ 'cart.loginNotice' | t }}
+    </p>
+
+    <button class="cd-clear-btn" (click)="clear()">{{ 'cart.clear' | t }}</button>
+  </div>
+
+</aside>

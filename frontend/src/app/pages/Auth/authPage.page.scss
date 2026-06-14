@@ -168,6 +168,36 @@ $border: rgba(240, 237, 232, 0.09);
   border-color: rgba(240, 237, 232, 0.48);
 }
 
+.auth-pw-wrap {
+  position: relative;
+
+  input {
+    padding-right: 46px;
+  }
+}
+
+.auth-pw-toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: rgba(240, 237, 232, 0.38);
+  transition: color 0.2s;
+
+  &:hover {
+    color: rgba(240, 237, 232, 0.8);
+  }
+}
+
 .auth-form button {
   @include condensed(11px, 0.18em);
   height: 52px;
@@ -176,6 +206,19 @@ $border: rgba(240, 237, 232, 0.09);
   border: 0;
   border-radius: 999px;
   cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.auth-error {
+  font-size: 0.78rem;
+  color: #e87070;
+  margin: 2px 0 4px;
+  text-align: center;
 }
 
 .auth-switch {

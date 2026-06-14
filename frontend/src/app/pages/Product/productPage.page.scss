@@ -42,9 +42,11 @@ $border: rgba(240, 237, 232, 0.08);
 }
 
 .lp-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
-  flex-shrink: 0;
   text-decoration: none;
 }
 
@@ -56,9 +58,6 @@ $border: rgba(240, 237, 232, 0.08);
 }
 
 .lp-nav {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 32px;
@@ -228,6 +227,7 @@ $border: rgba(240, 237, 232, 0.08);
   position: sticky;
   top: 0;
   height: 100vh;
+  overflow-y: auto;
   padding: 132px 48px 48px;
   background: #0f0f0f;
   border-left: 1px solid rgba(240, 237, 232, 0.08);
@@ -295,23 +295,52 @@ $border: rgba(240, 237, 232, 0.08);
   margin-bottom: 22px;
 }
 
-.pp-sizes button {
+.pp-sizes button,
+.pp-size-btn {
   @include condensed(11px, 0.08em);
   height: 42px;
   color: $cream;
   background: transparent;
   border: 1px solid rgba(240, 237, 232, 0.2);
   cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
 
   &:hover {
-    border-color: rgba(240, 237, 232, 0.7);
-    background: rgba(240, 237, 232, 0.06);
+    border-color: rgba(240, 237, 232, 0.6);
+    background: rgba(240, 237, 232, 0.05);
   }
+
+  &.pp-size-btn--active {
+    color: $ink;
+    background: $cream;
+    border-color: $cream;
+  }
+}
+
+.pp-size-guide-btn {
+  @include condensed(9px, 0.14em);
+  color: rgba(240, 237, 232, 0.5);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+  &:hover { color: $cream; }
+}
+
+.pp-size-error {
+  @include condensed(9px, 0.12em);
+  color: #e87070;
+  margin: -14px 0 16px;
 }
 
 .pp-add {
   @include condensed(11px, 0.18em);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
   width: 100%;
   height: 52px;
   margin: 8px 0 28px;
@@ -320,6 +349,15 @@ $border: rgba(240, 237, 232, 0.08);
   border: 0;
   border-radius: 100px;
   cursor: pointer;
+  transition: background 0.25s, color 0.25s, opacity 0.2s;
+
+  &:disabled { opacity: 0.38; cursor: not-allowed; }
+
+  &.pp-add--success {
+    background: rgba(120, 200, 140, 0.15);
+    color: rgba(120, 200, 140, 0.9);
+    border: 1px solid rgba(120, 200, 140, 0.3);
+  }
 }
 
 .pp-info {
@@ -339,9 +377,9 @@ $border: rgba(240, 237, 232, 0.08);
 .pp-info p,
 .pp-info li {
   @include barlow(300);
-  color: rgba(240, 237, 232, 0.52);
-  font-size: 0.82rem;
-  line-height: 1.7;
+  color: rgba(240, 237, 232, 0.78);
+  font-size: 0.88rem;
+  line-height: 1.75;
 }
 
 .pp-info ul {
