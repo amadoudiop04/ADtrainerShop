@@ -197,8 +197,19 @@ $muted:      rgba(240, 237, 232, 0.4);
 
 .lp-eyebrow {
   @include condensed(9px, 0.45em);
-  color: rgba(240, 237, 232, 0.45);
-  margin-bottom: 20px;
+  color: rgba(240, 237, 232, 0.55);
+  margin-bottom: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  &::before,
+  &::after {
+    content: '';
+    width: 24px;
+    height: 0.5px;
+    background: rgba(240, 237, 232, 0.28);
+  }
 }
 
 .lp-hero-title {
@@ -207,30 +218,32 @@ $muted:      rgba(240, 237, 232, 0.4);
 
 .lp-title-straight {
   @include playfair;
-  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  font-size: clamp(2.2rem, 5.5vw, 3.9rem);
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
   color: $cream;
   display: block;
 }
 
 .lp-title-italic {
   @include playfair;
-  font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+  font-size: clamp(2.2rem, 5.5vw, 3.9rem);
   font-weight: 400;
   font-style: italic;
-  line-height: 1.1;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
   color: $cream;
   display: block;
 }
 
 .lp-hero-sub {
   @include barlow(300);
-  font-size: 0.75rem;
-  line-height: 1.7;
-  color: rgba(240, 237, 232, 0.45);
-  margin-top: 20px;
-  max-width: 340px;
+  font-size: 0.82rem;
+  line-height: 1.75;
+  color: rgba(240, 237, 232, 0.55);
+  margin-top: 22px;
+  max-width: 380px;
 }
 
 .lp-hero-ctas {
@@ -244,28 +257,36 @@ $muted:      rgba(240, 237, 232, 0.4);
   @include condensed(10px, 0.28em);
   color: $ink;
   background: $cream;
-  border: none;
-  padding: 13px 28px;
+  border: 0.5px solid $cream;
+  padding: 14px 30px;
   border-radius: 100px;
   text-decoration: none;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 
-  &:hover { background: #fff; }
+  &:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px -12px rgba(240, 237, 232, 0.45);
+  }
 }
 
 .lp-btn-secondary {
   @include condensed(10px, 0.28em);
   color: $cream;
-  background: transparent;
+  background: rgba(240, 237, 232, 0.02);
   border: 0.5px solid rgba(240, 237, 232, 0.35);
-  padding: 13px 28px;
+  padding: 14px 30px;
   border-radius: 100px;
   text-decoration: none;
   cursor: pointer;
-  transition: border-color 0.2s;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
 
-  &:hover { border-color: rgba(240, 237, 232, 0.7); }
+  &:hover {
+    border-color: rgba(240, 237, 232, 0.7);
+    background: rgba(240, 237, 232, 0.06);
+    transform: translateY(-2px);
+  }
 }
 
 .lp-scroll-hint {
@@ -299,6 +320,14 @@ $muted:      rgba(240, 237, 232, 0.4);
   border-bottom: 0.5px solid $border;
   background: $ink-mid;
   overflow: hidden;
+  padding-top: 34px;
+}
+
+.lp-sponsors-eyebrow {
+  @include condensed(8px, 0.4em);
+  color: rgba(240, 237, 232, 0.3);
+  text-align: center;
+  margin: 0 0 4px;
 }
 
 .lp-sponsors-mask {
@@ -325,7 +354,7 @@ $muted:      rgba(240, 237, 232, 0.4);
   display: flex;
   align-items: center;
   gap: 24px;
-  padding: 28px 24px;
+  padding: 18px 24px 30px;
   flex-shrink: 0;
 }
 
@@ -392,11 +421,27 @@ $muted:      rgba(240, 237, 232, 0.4);
   }
 }
 
+.lp-precision-kicker {
+  @include condensed(10px, 0.28em);
+  color: rgba(240, 237, 232, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.lp-precision-index {
+  color: rgba(240, 237, 232, 0.28);
+  padding-right: 14px;
+  border-right: 0.5px solid rgba(240, 237, 232, 0.14);
+}
+
 .lp-precision-title {
   @include playfair;
   font-size: clamp(1.9rem, 3.2vw, 2.8rem);
   font-weight: 200;
-  line-height: 1.2;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
   color: $cream;
   margin-bottom: 24px;
 }
@@ -412,28 +457,36 @@ $muted:      rgba(240, 237, 232, 0.4);
 
 .lp-stats {
   display: flex;
-  gap: 40px;
+  gap: 0;
   padding-top: 28px;
   border-top: 0.5px solid rgba(240, 237, 232, 0.09);
 }
 
-.lp-stat {}
+.lp-stat {
+  padding-right: 40px;
+
+  & + .lp-stat {
+    padding-left: 40px;
+    border-left: 0.5px solid rgba(240, 237, 232, 0.09);
+  }
+}
 
 .lp-stat-num {
-  @include condensed;
-  font-size: 1.9rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 2.1rem;
   font-weight: 300;
   color: $cream;
   display: block;
   line-height: 1;
   letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
 }
 
 .lp-stat-label {
   @include condensed(9px, 0.22em);
   color: rgba(240, 237, 232, 0.35);
   display: block;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 .lp-precision-right {
@@ -445,6 +498,10 @@ $muted:      rgba(240, 237, 232, 0.4);
   @media (max-width: 900px) {
     min-height: 420px;
   }
+
+  &:hover .lp-engine-img {
+    transform: scale(1.04);
+  }
 }
 
 .lp-engine-img {
@@ -455,6 +512,7 @@ $muted:      rgba(240, 237, 232, 0.4);
   object-fit: cover;
   object-position: center 20%;
   filter: saturate(0.82) contrast(1.08);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .lp-engine-overlay {

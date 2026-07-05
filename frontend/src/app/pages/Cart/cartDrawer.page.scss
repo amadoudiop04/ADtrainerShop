@@ -328,9 +328,13 @@ $amber: #c89448;
   border: 0;
   border-radius: 14px;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, opacity 0.2s;
   margin-top: 4px;
-  &:hover:not(:disabled) { opacity: 0.88; }
+  &:hover:not(:disabled):not(.cd-checkout-btn--locked) {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px -14px rgba(240, 237, 232, 0.5);
+  }
   &:disabled { opacity: 0.45; cursor: not-allowed; }
   &--locked {
     background: rgba(240, 237, 232, 0.1);

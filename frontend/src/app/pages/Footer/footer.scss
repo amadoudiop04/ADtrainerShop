@@ -226,16 +226,26 @@ $amber: #c89448;
   @include condensed(10px, 0.14em);
   color: $muted;
   text-decoration: none;
-  transition: color 0.2s;
+  border: 0.5px solid rgba(240, 237, 232, 0.14);
+  border-radius: 999px;
+  padding: 9px 16px;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
 
-  &:hover { color: $cream; }
+  svg { transition: color 0.2s; }
+
+  &:hover {
+    color: $cream;
+    border-color: rgba(240, 237, 232, 0.32);
+    background: rgba(240, 237, 232, 0.04);
+    svg { color: $amber; }
+  }
 }
 
 .ft-col { padding-right: 16px; }
 
 .ft-col-title {
-  @include condensed(10px, 0.2em);
-  color: $muted;
+  @include condensed(10px, 0.24em);
+  color: $amber;
   margin: 0 0 18px;
 }
 
@@ -252,9 +262,13 @@ $amber: #c89448;
   font-size: 0.88rem;
   color: rgba(240, 237, 232, 0.5);
   text-decoration: none;
-  transition: color 0.2s;
+  transition: color 0.2s, transform 0.2s;
+  display: inline-block;
 
-  &:hover { color: $cream; }
+  &:hover {
+    color: $cream;
+    transform: translateX(3px);
+  }
 }
 
 /* ── Bottom bar ────────────────────────────────────────── */

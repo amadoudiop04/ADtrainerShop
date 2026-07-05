@@ -94,8 +94,12 @@ $amber: #c89448;
   background: $cream;
   border-radius: 999px;
   text-decoration: none;
-  transition: opacity 0.2s;
-  &:hover { opacity: 0.85; }
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  &:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px -14px rgba(240, 237, 232, 0.5);
+  }
 }
 
 .ps-btn-secondary {
@@ -105,10 +109,14 @@ $amber: #c89448;
   justify-content: center;
   height: 52px;
   color: $cream;
-  background: transparent;
+  background: rgba(240, 237, 232, 0.02);
   border: 0.5px solid rgba(240, 237, 232, 0.22);
   border-radius: 999px;
   text-decoration: none;
-  transition: border-color 0.2s;
-  &:hover { border-color: rgba(240, 237, 232, 0.5); }
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+  &:hover {
+    border-color: rgba(240, 237, 232, 0.5);
+    background: rgba(240, 237, 232, 0.06);
+    transform: translateY(-2px);
+  }
 }

@@ -235,14 +235,35 @@ $border: rgba(240, 237, 232, 0.08);
 
 .pp-back {
   @include condensed(10px, 0.16em);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   color: rgba(240, 237, 232, 0.45);
   text-decoration: none;
+  transition: color 0.2s, gap 0.2s;
+
+  &::before { content: '←'; font-size: 13px; }
+
+  &:hover {
+    color: $cream;
+    gap: 12px;
+  }
 }
 
 .pp-badge {
-  @include condensed(10px, 0.18em);
+  @include condensed(10px, 0.22em);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   margin: 34px 0 12px;
-  color: rgba(240, 237, 232, 0.56);
+  color: rgba(200, 148, 72, 0.85);
+
+  &::before {
+    content: '';
+    width: 20px;
+    height: 0.5px;
+    background: rgba(200, 148, 72, 0.5);
+  }
 }
 
 .pp-panel h1 {
@@ -349,7 +370,13 @@ $border: rgba(240, 237, 232, 0.08);
   border: 0;
   border-radius: 100px;
   cursor: pointer;
-  transition: background 0.25s, color 0.25s, opacity 0.2s;
+  transition: background 0.25s, color 0.25s, opacity 0.2s, transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover:not(:disabled):not(.pp-add--success) {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px -14px rgba(240, 237, 232, 0.5);
+  }
 
   &:disabled { opacity: 0.38; cursor: not-allowed; }
 
@@ -372,6 +399,31 @@ $border: rgba(240, 237, 232, 0.08);
   @include condensed(10px, 0.18em);
   padding: 18px 0;
   cursor: pointer;
+  list-style: none;
+  position: relative;
+  color: rgba(240, 237, 232, 0.9);
+  transition: color 0.2s;
+
+  &::-webkit-details-marker { display: none; }
+
+  &::after {
+    content: '+';
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 17px;
+    font-weight: 200;
+    color: rgba(240, 237, 232, 0.4);
+    transition: transform 0.25s, color 0.2s;
+  }
+
+  &:hover { color: $cream; }
+}
+
+.pp-info details[open] summary::after {
+  transform: translateY(-50%) rotate(45deg);
+  color: rgba(200, 148, 72, 0.9);
 }
 
 .pp-info p,

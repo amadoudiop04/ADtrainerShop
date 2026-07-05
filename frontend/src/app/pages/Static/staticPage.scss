@@ -66,10 +66,14 @@ $amber: #c89448;
   color: $ink;
   background: $cream;
   border-radius: 999px;
-  padding: 8px 18px;
+  padding: 9px 20px;
   text-decoration: none;
-  transition: opacity 0.2s;
-  &:hover { opacity: 0.85; }
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  &:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px -12px rgba(240, 237, 232, 0.45);
+  }
 }
 
 /* ── Page wrapper ──────────────────────────────────────── */
@@ -365,11 +369,15 @@ $amber: #c89448;
   color: $ink;
   background: $cream;
   border-radius: 999px;
-  padding: 14px 28px;
+  padding: 14px 30px;
   text-decoration: none;
-  transition: opacity 0.2s;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 
-  &:hover { opacity: 0.85; }
+  &:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px -14px rgba(240, 237, 232, 0.5);
+  }
 }
 
 /* ── Responsive ────────────────────────────────────────── */

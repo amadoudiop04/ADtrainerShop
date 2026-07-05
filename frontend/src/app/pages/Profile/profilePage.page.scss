@@ -233,8 +233,12 @@ $amber: #c89448;
   border-radius: 999px;
   padding: 10px 20px;
   cursor: pointer;
-  transition: opacity 0.2s;
-  &:hover { opacity: 0.85; }
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  &:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px -12px rgba(240, 237, 232, 0.45);
+  }
 }
 
 /* ── Body ────────────────────────────────────────────────── */
@@ -257,6 +261,9 @@ $amber: #c89448;
   border-radius: 20px;
   padding: 28px 32px 32px;
   box-shadow: 0 4px 40px rgba(0, 0, 0, 0.32), 0 1px 0 rgba(255, 255, 255, 0.03) inset;
+  transition: border-color 0.3s ease;
+
+  &:hover { border-color: rgba(240, 237, 232, 0.14); }
 }
 
 .profile-card--info {
@@ -483,8 +490,12 @@ $amber: #c89448;
   border-radius: 999px;
   padding: 0 28px;
   cursor: pointer;
-  transition: opacity 0.2s;
-  &:hover { opacity: 0.85; }
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, opacity 0.2s;
+  &:hover:not(:disabled) {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px -12px rgba(240, 237, 232, 0.45);
+  }
   &:disabled { opacity: 0.45; cursor: not-allowed; }
 }
 
@@ -620,7 +631,7 @@ $amber: #c89448;
 
 .profile-kicker {
   @include condensed(10px, 0.2em);
-  color: $muted;
+  color: rgba(200, 148, 72, 0.85);
   margin: 0 0 14px;
 }
 
@@ -649,8 +660,12 @@ $amber: #c89448;
   border-radius: 999px;
   padding: 14px 32px;
   cursor: pointer;
-  transition: opacity 0.2s;
-  &:hover { opacity: 0.85; }
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  &:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px -14px rgba(240, 237, 232, 0.5);
+  }
 }
 
 /* ── Responsive ──────────────────────────────────────────── */
